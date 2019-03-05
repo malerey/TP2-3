@@ -31,14 +31,32 @@ var local = {
   ]
 };
 
+var cadaComponentePrecio = local.precios.map(function(objeto){
+  return objeto.componente
+})
+
+var cadaPrecio = local.precios.map(function(objeto){
+  return objeto.precio
+})
+console.log(cadaComponentePrecio)
+console.log(cadaPrecio)
+
+
+
+
+
+
+
 var preciosMaquinas =[];
-if(local.ventas[0].componentes[0]==local.precios[0].componente){
+
+if(local.ventas[0].componentes[0]===local.precios[0].componente){
   preciosMaquinas.push(local.precios[0].precio)
 
 }
+
 console.log(preciosMaquinas)
 
-if(local.ventas[0].componentes[1]==local.precios[1].componente){
+if(local.ventas[0].componentes[1]===local.precios[1].componente){
   preciosMaquinas.push(local.precios[1].precio)
 
 }
