@@ -11,7 +11,7 @@ var local = {
   vendedoras: ["Ada", "Grace", "Hedy", "Sheryl"],
 
   ventas: [
-    { fecha: new Date(2019, 1, 4), nombreVendedora: "Grace", componentes: ["Monitor GPRS 3000 (1)", "Motherboard ASUS 1500(2)"] },
+    { fecha: new Date(2019, 1, 4), nombreVendedora: "Grace", componentes: ["Monitor GPRS 3000", "Motherboard ASUS 1500"] },
     { fecha: new Date(2019, 0, 1), nombreVendedora: "Ada", componentes: ["Monitor GPRS 3000(3)", "Motherboard ASUS 1500(4)"] },
     { fecha: new Date(2019, 0, 2), nombreVendedora: "Grace", componentes: ["Monitor ASC 543(5)", "Motherboard MZI(6)"] },
     { fecha: new Date(2019, 0, 10), nombreVendedora: "Ada", componentes: ["Monitor ASC 543(7)", "Motherboard ASUS 1200(8)"] },
@@ -31,20 +31,27 @@ var local = {
   ]
 };
 
-var cadaComponente = local.ventas.forEach(function(venta){
-    for(i=0;i<venta.componentes.length;i++){
+var preciosMaquinas =[];
+if(local.ventas[0].componentes[0]==local.precios[0].componente){
+  preciosMaquinas.push(local.precios[0].precio)
 
-        return venta.componentes[i]
-    }
+}
+console.log(preciosMaquinas)
+
+if(local.ventas[0].componentes[1]==local.precios[1].componente){
+  preciosMaquinas.push(local.precios[1].precio)
+
+}
+console.log(preciosMaquinas)
+
+var precioCadaMaquina = preciosMaquinas.reduce(function(total,precio){
+  return total + precio
 })
 
-console.log(cadaComponente)
-
-
-
-
+console.log(precioCadaMaquina)
 //Se pide desarrollar las siguientes funciones:
 
-//precioMaquina(componentes): recibe un array de componentes y devuelve el precio de la máquina que se puede armar con esos componentes, que es la suma de los precios de cada componente incluido.
+//precioMaquina(componentes): recibe un array de componentes y devuelve el precio de la máquina que se puede armar con esos componentes, 
+//que es la suma de los precios de cada componente incluido.
 
 //console.log( precioMaquina(["Monitor GPRS 3000", "Motherboard ASUS 1500"]) ); // 320 ($200 del monitor + $120 del motherboard)
