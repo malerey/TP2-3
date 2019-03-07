@@ -11,7 +11,7 @@ var local = {
   vendedoras: ["Ada", "Grace", "Hedy", "Sheryl"],
 
   ventas: [
-    { fecha: new Date(2019, 1, 4), nombreVendedora: "Grace", componentes: ["Monitor GPRS 3000", "Motherboard ASUS 1500 (2)"] },
+    { fecha: new Date(2019, 1, 4), nombreVendedora: "Grace", componentes: ["Monitor GPRS 3000(1)", "Motherboard ASUS 1500 (2)"] },
     { fecha: new Date(2019, 0, 1), nombreVendedora: "Ada", componentes: ["Monitor GPRS 3000(3)", "Motherboard ASUS 1500(4)"] },
     { fecha: new Date(2019, 0, 2), nombreVendedora: "Grace", componentes: ["Monitor ASC 543(5)", "Motherboard MZI(6)"] },
     { fecha: new Date(2019, 0, 10), nombreVendedora: "Ada", componentes: ["Monitor ASC 543(7)", "Motherboard ASUS 1200(8)"] },
@@ -31,17 +31,42 @@ var local = {
   ]
 };
 
+
+var componentes = local.ventas.map(function(cadaVenta){
+    return cadaVenta.componentes
+})
+
+console.log(componentes)
+
+var precios= local.precios;
+
+console.log(precios)
+
+var precioCadaMaquina = [];
+
+for(i=0; i<componentes.length;i++){
+  for(j=0; j<precios.length;j++){
+    if(componentes[i] === precios[j].componente){
+      preciosCadaMaquina.push(precios[j].precio);
+    }
+  }
+}
+console.log(precioCadaMaquina)
+/*
 var compo =null;
+
 var cadaComponente = local.ventas.map(function(venta){
 
   for(i=0;i<venta.componentes.length;i++){
+
     console.log(venta.componentes[i])
-    //compo.push(venta.componentes[i])
+
+
   }
 
 })
 
-/*
+
 var cadaComponentePrecios = local.precios.map(function(objeto){
   return objeto.componente
 })
@@ -49,11 +74,6 @@ var cadaComponentePrecios = local.precios.map(function(objeto){
 var cadaPrecio = local.precios.map(function(objeto){
   return objeto.precio
 })
-
-
-
-
-
 
 
 
