@@ -11,11 +11,11 @@ var local = {
   vendedoras: ["Ada", "Grace", "Hedy", "Sheryl"],
 
   ventas: [
-    { fecha: new Date(2019, 1, 4), nombreVendedora: "Grace", componentes: ["Monitor GPRS 3000(1)", "Motherboard ASUS 1500 (2)"] },
-    { fecha: new Date(2019, 0, 1), nombreVendedora: "Ada", componentes: ["Monitor GPRS 3000(3)", "Motherboard ASUS 1500(4)"] },
-    { fecha: new Date(2019, 0, 2), nombreVendedora: "Grace", componentes: ["Monitor ASC 543(5)", "Motherboard MZI(6)"] },
-    { fecha: new Date(2019, 0, 10), nombreVendedora: "Ada", componentes: ["Monitor ASC 543(7)", "Motherboard ASUS 1200(8)"] },
-    { fecha: new Date(2019, 0, 12), nombreVendedora: "Grace", componentes: ["Monitor GPRS 3000(9)", "Motherboard ASUS 1200(10)"] }
+    { fecha: new Date(2019, 1, 4), nombreVendedora: "Grace", componentes: ["Monitor GPRS 3000", "Motherboard ASUS 1500"] },
+    { fecha: new Date(2019, 0, 1), nombreVendedora: "Ada", componentes: ["Monitor GPRS 3000", "Motherboard ASUS 1500"] },
+    { fecha: new Date(2019, 0, 2), nombreVendedora: "Grace", componentes: ["Monitor ASC 543", "Motherboard MZI"] },
+    { fecha: new Date(2019, 0, 10), nombreVendedora: "Ada", componentes: ["Monitor ASC 543", "Motherboard ASUS 1200"] },
+    { fecha: new Date(2019, 0, 12), nombreVendedora: "Grace", componentes: ["Monitor GPRS 3000", "Motherboard ASUS 1200"] }
   ],
 
   precios: [
@@ -32,74 +32,88 @@ var local = {
 };
 
 
-var componentes = local.ventas.map(function(cadaVenta){
-    return cadaVenta.componentes
-})
-
-console.log(componentes)
-
-var precios= local.precios;
-
-console.log(precios)
-
-var precioCadaMaquina = [];
-
-for(i=0; i<componentes.length;i++){
-  for(j=0; j<precios.length;j++){
-    if(componentes[i] === precios[j].componente){
-      preciosCadaMaquina.push(precios[j].precio);
-    }
-  }
-}
-console.log(precioCadaMaquina)
-/*
-var compo =null;
-
-var cadaComponente = local.ventas.map(function(venta){
-
-  for(i=0;i<venta.componentes.length;i++){
-
-    console.log(venta.componentes[i])
-
-
-  }
-
-})
-
-
-var cadaComponentePrecios = local.precios.map(function(objeto){
-  return objeto.componente
-})
-
-var cadaPrecio = local.precios.map(function(objeto){
-  return objeto.precio
-})
-
-
-
-var preciosMaquinas =[];
-
-if(local.ventas[0].componentes[0]===local.precios[0].componente){
-  preciosMaquinas.push(local.precios[0].precio)
-
-}
-
-console.log(preciosMaquinas)
-
-if(local.ventas[0].componentes[1]===local.precios[1].componente){
-  preciosMaquinas.push(local.precios[1].precio)
-
-}
-console.log(preciosMaquinas)
-
-var precioCadaMaquina = preciosMaquinas.reduce(function(total,precio){
-  return total + precio
-})
-
-console.log(precioCadaMaquina)*/
-//Se pide desarrollar las siguientes funciones:
+//1. Se pide desarrollar las siguientes funciones:
 
 //precioMaquina(componentes): recibe un array de componentes y devuelve el precio de la máquina que se puede armar con esos componentes, 
-//que es la suma de los precios de cada componente incluido.
+//que es la suma de los precios de cada componente incluido
 
-//console.log( precioMaquina(["Monitor GPRS 3000", "Motherboard ASUS 1500"]) ); // 320 ($200 del monitor + $120 del motherboard)
+
+
+function precioMaquina (arrayComponentes){
+
+  var sumPrecios = [];
+  
+    arrayComponentes.map(function(cadaComponente){
+      local.precios.map(function(precio){
+        if(precio.componente === cadaComponente){
+          sumPrecios.push(precio.precio)
+        }
+      })
+    })
+
+  return sumPrecios.reduce(function(total,suma){ //Este return retorna TODA la función
+
+    return total + suma; // Este este return es solo de esta función
+  })
+  
+  
+}
+console.log(precioMaquina(["Monitor GPRS 3000", "Motherboard ASUS 1500"]))
+console.log(precioMaquina(["Monitor GPRS 3000", "Motherboard ASUS 1500"]))
+console.log(precioMaquina(["Monitor ASC 543", "Motherboard MZI"]))
+console.log(precioMaquina(["Monitor ASC 543", "Motherboard ASUS 1200"]))
+console.log(precioMaquina(["Monitor GPRS 3000", "Motherboard ASUS 1200"]))
+
+
+//cantidadVentasComponente(componente): recibe un componente y devuelve la cantidad de veces que fue vendido, o sea que 
+//formó parte de una máquina que se vendió. La lista de ventas no se pasa por parámetro, se asume que está identificada por la variable ventas.
+
+
+function cantidadVentasComponente(componente){
+
+  var i = 0;
+
+  local.ventas.map(function(cadaVenta){
+
+     cadaVenta.componentes.map(function(cadaComponente){
+
+       if(componente === cadaComponente){
+         i++;
+       }
+     })
+  })
+
+  return i;
+}
+
+console.log( cantidadVentasComponente("Monitor GPRS 3000") ); // 2
+console.log( cantidadVentasComponente("Motherboard ASUS 1500") );
+console.log( cantidadVentasComponente("Monitor ASC 543") );
+console.log( cantidadVentasComponente("Motherboard ASUS 1200") );
+console.log( cantidadVentasComponente("Motherboard MZI") );
+console.log( cantidadVentasComponente("HDD Toyiva") );
+console.log( cantidadVentasComponente("HDD Wezter Dishital") );
+console.log( cantidadVentasComponente("RAM Quinston") );
+console.log( cantidadVentasComponente("RAM Quinston Fury") );
+
+//vendedoraDelMes(mes, anio), se le pasa dos parámetros numéricos, (mes, anio) y devuelve el nombre de la vendedora que más vendió en plata en el mes. O sea no cantidad de ventas, sino importe total de las ventas. El importe de una venta es el que indica la función precioMaquina.
+
+//console.log( vendedoraDelMes(1, 2019) ); // "Ada" (vendio por $670, una máquina de $320 y otra de $350)
+
+
+
+
+
+
+
+//ventasMes(mes, anio): Obtener las ventas de un mes.
+
+//console.log( ventasMes(1, 2019) ); // 1250
+
+
+
+
+
+//ventasVendedora(nombre): Obtener las ventas totales realizadas por una vendedora sin límite de fecha.
+
+//console.log( ventasVendedora("Grace") ); // 900
