@@ -58,67 +58,76 @@ function precioMaquina (arrayComponentes){
   
   
 }
-console.log(precioMaquina(["Monitor GPRS 3000", "Motherboard ASUS 1500"]))
-console.log(precioMaquina(["Monitor GPRS 3000", "Motherboard ASUS 1500"]))
-console.log(precioMaquina(["Monitor ASC 543", "Motherboard MZI"]))
-console.log(precioMaquina(["Monitor ASC 543", "Motherboard ASUS 1200"]))
-console.log(precioMaquina(["Monitor GPRS 3000", "Motherboard ASUS 1200"]))
-
-
-//cantidadVentasComponente(componente): recibe un componente y devuelve la cantidad de veces que fue vendido, o sea que 
-//formó parte de una máquina que se vendió. La lista de ventas no se pasa por parámetro, se asume que está identificada por la variable ventas.
-
-
-function cantidadVentasComponente(componente){
-
-  var i = 0;
-
-  local.ventas.map(function(cadaVenta){
-
-     cadaVenta.componentes.map(function(cadaComponente){
-
-       if(componente === cadaComponente){
-         i++;
-       }
-     })
-  })
-
-  return i;
-}
-
-console.log( cantidadVentasComponente("Monitor GPRS 3000") ); // 3
-console.log( cantidadVentasComponente("Motherboard ASUS 1500") );//2
-console.log( cantidadVentasComponente("Monitor ASC 543") );
-console.log( cantidadVentasComponente("Motherboard ASUS 1200") );
-console.log( cantidadVentasComponente("Motherboard MZI") );
-console.log( cantidadVentasComponente("HDD Toyiva") );
-console.log( cantidadVentasComponente("HDD Wezter Dishital") );
-console.log( cantidadVentasComponente("RAM Quinston") );
-console.log( cantidadVentasComponente("RAM Quinston Fury") );
-
 //vendedoraDelMes(mes, anio), se le pasa dos parámetros numéricos, (mes, anio) y devuelve el nombre de la vendedora que más vendió en plata en el mes. O sea no cantidad de ventas, sino importe total de las ventas. El importe de una venta es el que indica la función precioMaquina.
+
+
 function vendedorasDelMes(mes,anio){
-  var ventasFiltradas = [];
+  
+   var ventasMes =[];
+  
   local.ventas.map(function(cadaVenta){
-    var fecha = cadaVenta. newDate()
-    console.log(fecha)
+      if(mes -1 === cadaVenta.fecha.getMonth() && anio === cadaVenta.fecha.getFullYear()){
+          ventasMes.push(cadaVenta);
+      }
   })
+
+  var ventaAda =[];
+  var cadaComponenteAda = [];
+  var ventaGrace=[];
+  var cadaComponenteGrace = [];
+  var ventaHedy=[];
+  var cadaComponenteHedy = [];
+  var ventaSheryl=[];
+  var cadaComponenteSheryl = [];
+
+  ventasMes.map(function(cadaVenta){
+
+      if(cadaVenta.nombreVendedora === 'Ada'){
+        ventaAda.push(cadaVenta.componentes)
+
+      }else if(cadaVenta.nombreVendedora === 'Grace'){
+        ventaGrace.push(cadaVenta.componentes)
+
+      }else if(cadaVenta.nombreVendedora === 'Hedy'){
+        ventaHedy.push(cadaVenta.componentes)
+
+    } else if(cadaVenta.nombreVendedora === 'Sheryl'){
+    ventaSheryl.push(cadaVenta.componentes)
+    }
+
+  })
+
+ventaAda.map(function(cadaVenta){
+    cadaVenta.map(function(componente){
+        cadaComponenteAda.push(componente)
+    })
+})
+
+ventaGrace.map(function(cadaVenta){
+    cadaVenta.map(function(componente){
+        cadaComponenteGrace.push(componente)
+    })
+})
+
+ventaHedy.map(function(cadaVenta){
+    cadaVenta.map(function(componente){
+        cadaComponenteHedy.push(componente)
+    })
+})
+
+ventaSheryl.map(function(cadaVenta){
+    cadaVenta.map(function(componente){
+        cadaComponenteSheryl.push(componente)
+    })
+})
+
 }
 
+vendedorasDelMes(1,2019)
 //console.log( vendedoraDelMes(1, 2019) ); // "Ada" (vendio por $670, una máquina de $320 y otra de $350)
 
 /*
-var diaDeHoy = new Date()
 
-console.log(diaDeHoy.getFullYear())
-console.log(diaDeHoy);
-console.log(diaDeHoy.getMonth())
-
-function vendedoraDelMes(mes,anio){
-  for(i=0;i<local.ventas.length; i++){
-    local.ventas[i].fecha
-  }
-}
 
 var ventasFiltradas = []
 recorrer el array ventas ventasFiltradas
