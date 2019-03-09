@@ -97,56 +97,80 @@ console.log( cantidadVentasComponente("RAM Quinston") );
 console.log( cantidadVentasComponente("RAM Quinston Fury") );
 
 //vendedoraDelMes(mes, anio), se le pasa dos parámetros numéricos, (mes, anio) y devuelve el nombre de la vendedora que más vendió en plata en el mes. O sea no cantidad de ventas, sino importe total de las ventas. El importe de una venta es el que indica la función precioMaquina.
-function vendedorasDelMes(mes,anio){
-  var ventasFiltradas = [];
-  local.ventas.map(function(cadaVenta){
-    var fecha = cadaVenta. newDate()
-    console.log(fecha)
-  })
-}
-
-//console.log( vendedoraDelMes(1, 2019) ); // "Ada" (vendio por $670, una máquina de $320 y otra de $350)
-
-/*
-var diaDeHoy = new Date()
-
-console.log(diaDeHoy.getFullYear())
-console.log(diaDeHoy);
-console.log(diaDeHoy.getMonth())
-
 function vendedoraDelMes(mes,anio){
-  for(i=0;i<local.ventas.length; i++){
-    local.ventas[i].fecha
-  }
+  
+  var ventasMes =[];
+ 
+ local.ventas.map(function(cadaVenta){
+     if(mes -1 === cadaVenta.fecha.getMonth() && anio === cadaVenta.fecha.getFullYear()){
+         ventasMes.push(cadaVenta);
+     }
+ })
+
+ var ventaAda =[];
+ var cadaComponenteAda = [];
+ var ventaGrace=[];
+ var cadaComponenteGrace = [];
+ var ventaHedy=[];
+ var cadaComponenteHedy = [];
+ var ventaSheryl=[];
+ var cadaComponenteSheryl = [];
+
+ ventasMes.map(function(cadaVenta){
+
+     if(cadaVenta.nombreVendedora === 'Ada'){
+       ventaAda.push(cadaVenta.componentes)
+
+     }else if(cadaVenta.nombreVendedora === 'Grace'){
+       ventaGrace.push(cadaVenta.componentes)
+
+     }else if(cadaVenta.nombreVendedora === 'Hedy'){
+       ventaHedy.push(cadaVenta.componentes)
+
+   } else if(cadaVenta.nombreVendedora === 'Sheryl'){
+   ventaSheryl.push(cadaVenta.componentes)
+   }
+
+ })
+
+ventaAda.map(function(cadaVenta){
+   cadaVenta.map(function(componente){
+       cadaComponenteAda.push(componente)
+   })
+})
+
+ventaGrace.map(function(cadaVenta){
+   cadaVenta.map(function(componente){
+       cadaComponenteGrace.push(componente)
+   })
+})
+
+ventaHedy.map(function(cadaVenta){
+   cadaVenta.map(function(componente){
+       cadaComponenteHedy.push(componente)
+   })
+})
+
+ventaSheryl.map(function(cadaVenta){
+   cadaVenta.map(function(componente){
+       cadaComponenteSheryl.push(componente)
+   })
+})
+
+if(precioMaquina(cadaComponenteAda) > precioMaquina(cadaComponenteGrace)){
+ 
+ return 'Ada';
+
+}else if(precioMaquina(cadaComponenteGrace) > precioMaquina(cadaComponenteAda)){
+ 
+ return 'Grace';
+
+}
 }
 
-var ventasFiltradas = []
-recorrer el array ventas ventasFiltradas
 
-for ventasFiltradas.vendedora
-
-if(local.ventas[i].vendedora === 'Ada')
-
-var ventasDeAda[];
-si las ventas tienen el nombre Ada tengo que sumar las 
-ventasDeAda.push(ventasFiltradas)
-
-
-
-for(){
-  var nuevaVariable = vendedoras[i]
-  nombre de variable dinamico
-
-  for(let i=0; i<cantidadDiv;i++){
-    var texto+i;
-}
-}
-*/
-
-//ventasMes(mes, anio): Obtener las ventas de un mes.
-
-//console.log( ventasMes(1, 2019) ); // 1250
-
+console.log(vendedoraDelMes(1, 2019)); // "Ada" (vendio por $670, una máquina de $320 y otra de $350)
+console.log(vendedoraDelMes(2, 2019)); 
 
 
 

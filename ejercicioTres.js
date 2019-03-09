@@ -41,27 +41,30 @@ var local = {
 
 function precioMaquina (arrayComponentes){
 
-  var sumPrecios = [];
+  var sumaPrecios = [];
   
     arrayComponentes.map(function(cadaComponente){
       local.precios.map(function(precio){
         if(precio.componente === cadaComponente){
-          sumPrecios.push(precio.precio)
+          sumaPrecios.push(precio.precio)
         }
       })
     })
 
-  return sumPrecios.reduce(function(total,suma){ //Este return retorna TODA la función
+  return sumaPrecios.reduce(function(total,suma){ //Este return retorna TODA la función
 
     return total + suma; // Este este return es solo de esta función
   })
   
   
 }
+
+//--------------------------------------------------------------------------------------------------
+
 //vendedoraDelMes(mes, anio), se le pasa dos parámetros numéricos, (mes, anio) y devuelve el nombre de la vendedora que más vendió en plata en el mes. O sea no cantidad de ventas, sino importe total de las ventas. El importe de una venta es el que indica la función precioMaquina.
 
 
-function vendedorasDelMes(mes,anio){
+function vendedoraDelMes(mes,anio){
   
    var ventasMes =[];
   
@@ -121,14 +124,22 @@ ventaSheryl.map(function(cadaVenta){
     })
 })
 
+if(precioMaquina(cadaComponenteAda) > precioMaquina(cadaComponenteGrace)){
+  
+  return 'Ada';
+
+}else if(precioMaquina(cadaComponenteGrace) > precioMaquina(cadaComponenteAda)){
+  
+  return 'Grace';
+
+}
 }
 
-vendedorasDelMes(1,2019)
-//console.log( vendedoraDelMes(1, 2019) ); // "Ada" (vendio por $670, una máquina de $320 y otra de $350)
+
+console.log(vendedoraDelMes(1, 2019)); // "Ada" (vendio por $670, una máquina de $320 y otra de $350)
+
 
 /*
-
-
 var ventasFiltradas = []
 recorrer el array ventas ventasFiltradas
 
