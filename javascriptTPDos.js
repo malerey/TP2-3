@@ -86,8 +86,8 @@ function cantidadVentasComponente(componente){
   return i;
 }
 
-console.log( cantidadVentasComponente("Monitor GPRS 3000") ); // 2
-console.log( cantidadVentasComponente("Motherboard ASUS 1500") );
+console.log( cantidadVentasComponente("Monitor GPRS 3000") ); // 3
+console.log( cantidadVentasComponente("Motherboard ASUS 1500") );//2
 console.log( cantidadVentasComponente("Monitor ASC 543") );
 console.log( cantidadVentasComponente("Motherboard ASUS 1200") );
 console.log( cantidadVentasComponente("Motherboard MZI") );
@@ -101,9 +101,39 @@ console.log( cantidadVentasComponente("RAM Quinston Fury") );
 //console.log( vendedoraDelMes(1, 2019) ); // "Ada" (vendio por $670, una máquina de $320 y otra de $350)
 
 
+var diaDeHoy = new Date()
+
+console.log(diaDeHoy.getFullYear())
+console.log(diaDeHoy);
+console.log(diaDeHoy.getMonth())
+
+function vendedoraDelMes(mes,anio){
+  for(i=0;i<local.ventas.length; i++){
+    local.ventas[i].fecha
+  }
+}
+
+var ventasFiltradas = []
+recorrer el array ventas ventasFiltradas
+
+for ventasFiltradas.vendedora
+
+if(local.ventas[i].vendedora === 'Ada')
+
+var ventasDeAda[];
+si las ventas tienen el nombre Ada tengo que sumar las 
+ventasDeAda.push(ventasFiltradas)
 
 
 
+for(){
+  var nuevaVariable = vendedoras[i]
+  nombre de variable dinamico
+
+  for(let i=0; i<cantidadDiv;i++){
+    var texto+i;
+}
+}
 
 
 //ventasMes(mes, anio): Obtener las ventas de un mes.
@@ -117,3 +147,11 @@ console.log( cantidadVentasComponente("RAM Quinston Fury") );
 //ventasVendedora(nombre): Obtener las ventas totales realizadas por una vendedora sin límite de fecha.
 
 //console.log( ventasVendedora("Grace") ); // 900
+/*
+function ventasVendedora(nombre){
+  local.ventas.map(cadaVenta){
+    console.log(cadaVenta.vendedoras + ' y '+ nombre)
+  }
+}
+ventasVendedora('Grace')*/
+//console.log( ventasVendedora("Grace") )
