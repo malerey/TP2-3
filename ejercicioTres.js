@@ -75,7 +75,7 @@ function vendedoraDelMes(mes,anio){
   })
 
   var ventaAda =[];
-  var cadaComponenteAda = [];
+  var cadaComponenteAda = [0];
   var ventaGrace=[];
   var cadaComponenteGrace = [];
   var ventaHedy=[];
@@ -124,20 +124,53 @@ ventaSheryl.map(function(cadaVenta){
     })
 })
 
-if(precioMaquina(cadaComponenteAda) > precioMaquina(cadaComponenteGrace)){
-  
-  return 'Ada';
+var arrayVentas = [];
 
-}else if(precioMaquina(cadaComponenteGrace) > precioMaquina(cadaComponenteAda)){
-  
-  return 'Grace';
+if (cadaComponenteAda.length>0){
 
+  arrayVentas.push(precioMaquina(cadaComponenteAda));
+}
+
+if (cadaComponenteGrace.length>0){
+
+  arrayVentas.push(precioMaquina(cadaComponenteGrace));
+}
+if (cadaComponenteHedy.length>0){
+
+  arrayVentas.push(precioMaquina(cadaComponenteHedy));
+}
+if (cadaComponenteSheryl.length>0){
+
+  arrayVentas.push(precioMaquina(cadaComponentesheryl));
+}
+
+arrayVentas.sort();
+
+if(precioMaquina(cadaComponenteAda) !== []){
+  if(arrayVentas[arrayVentas.length-1]== precioMaquina(cadaComponenteAda) ){
+    return 'Ada'
+  }
+
+} else if(precioMaquina(cadaComponenteGrace) !== []){
+  if(arrayVentas[arrayVentas.length-1]== precioMaquina(cadaComponenteGrace) ){
+    return 'Grace'
+  }
+
+} else if(precioMaquina(cadaComponenteHedy) !== []){
+  if(arrayVentas[arrayVentas.length-1]== precioMaquina(cadaComponenteHedy) ){
+    return 'Hedy'
+  }
+
+} else if(precioMaquina(cadaComponenteSheryl) !== []){
+  if(arrayVentas[arrayVentas.length-1]== precioMaquina(cadaComponenteSheryl) ){
+    return 'Hedy'
+  }
 }
 }
 
 
 console.log(vendedoraDelMes(1, 2019)); // "Ada" (vendio por $670, una máquina de $320 y otra de $350)
-
+console.log(vendedoraDelMes(2, 2019));
 
 /*
 var ventasFiltradas = []
