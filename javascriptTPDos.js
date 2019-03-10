@@ -105,6 +105,7 @@ console.log( cantidadVentasComponente("RAM Quinston Fury") );
 //---------------------------------------------------------------------------------------------------------------------------
 
 //vendedoraDelMes(mes, anio), se le pasa dos parámetros numéricos, (mes, anio) y devuelve el nombre de la vendedora que más vendió en plata en el mes. O sea no cantidad de ventas, sino importe total de las ventas. El importe de una venta es el que indica la función precioMaquina.
+
 function vendedoraDelMes(mes,anio){
   
   var ventasMes =[];
@@ -207,22 +208,81 @@ arrayVentas = arrayVentas.sort();
 
 }
 
-
-
 console.log(vendedoraDelMes(1, 2019)); // "Ada" (vendio por $670, una máquina de $320 y otra de $350)
 console.log(vendedoraDelMes(2, 2019)); 
 
 
+//---------------------------------------------------------------------------------------------------------------------------
 
+//ventasMes(mes, anio): Obtener las ventas de un mes.
+
+function ventasMes(mes,anio){
+
+  var componentesVendidos =[];
+  var componentesASumar =[];
+
+  local.ventas.map(function(cadaVenta){
+
+    if(mes -1 === cadaVenta.fecha.getMonth() && anio === cadaVenta.fecha.getFullYear()){
+      componentesVendidos.push(cadaVenta.componentes)
+  }
+  })
+  
+  componentesVendidos.map(function(cadaVenta){
+    cadaVenta.map(function(cadaComponente){
+      componentesASumar.push(cadaComponente)
+    })
+  })
+  
+  return precioMaquina(componentesASumar)
+}
+
+console.log( ventasMes(1, 2019) ); // 1250
+console.log( ventasMes(2, 2019) ); // 320
+
+
+//---------------------------------------------------------------------------------------------------------------------------
 
 //ventasVendedora(nombre): Obtener las ventas totales realizadas por una vendedora sin límite de fecha.
 
-//console.log( ventasVendedora("Grace") ); // 900
-/*
 function ventasVendedora(nombre){
-  local.ventas.map(cadaVenta){
-    console.log(cadaVenta.vendedoras + ' y '+ nombre)
-  }
+
+  var venta = [];
+  var componentesASumar = [];
+
+  local.ventas.map(function(cadaVenta){
+
+    if(cadaVenta.nombreVendedora === nombre){
+
+      venta.push(cadaVenta.componentes);
+      
+    }
+  })
+  venta.map(function(cadaVenta){
+    cadaVenta.map(function(cadaComponente){
+      componentesASumar.push(cadaComponente)
+    })
+  })
+    return precioMaquina (componentesASumar)
 }
-ventasVendedora('Grace')*/
-//console.log( ventasVendedora("Grace") )
+
+console.log( ventasVendedora("Grace") ); // 900
+console.log( ventasVendedora("Ada") ); // 670
+
+
+//---------------------------------------------------------------------------------------------------------------------------
+
+//componenteMasVendido(): Devuelve el nombre del componente que más ventas tuvo historicamente. El dato de la cantidad de ventas es el que indica la función cantidadVentasComponente
+
+//console.log( componenteMasVendido() ); // Monitor GPRS 3000
+
+
+
+
+
+
+//---------------------------------------------------------------------------------------------------------------------------
+
+//huboVentas(mes, anio): que indica si hubo ventas en un mes determinado.
+
+console.log( huboVentas(3, 2019) ); // false
