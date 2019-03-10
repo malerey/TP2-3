@@ -274,6 +274,69 @@ console.log( ventasVendedora("Ada") ); // 670
 
 //componenteMasVendido(): Devuelve el nombre del componente que más ventas tuvo historicamente. El dato de la cantidad de ventas es el que indica la función cantidadVentasComponente
 
+function componenteMasVendido(){
+
+  var componentes = {
+    monitorGprs3000: [],
+    motherboardAsus1500:[],
+    monitorAsc543: [],
+    motherboardAsus1200:[],
+    motherboardMzi:[],
+    hddToyiva: [],
+    hddWetzerDishital: [],
+    ramQuinston:[],
+    ramQuinstonFury:[] 
+  };
+  var componenteLargo = [];
+
+  local.ventas.map(function(cadaVenta){
+
+    cadaVenta.componentes.map(function(cadaComponente){
+
+      if(cadaComponente === 'Monitor GPRS 3000'){
+
+        componentes.monitorGprs3000.push('Monitor GPRS 3000')
+
+      } else if(cadaComponente === 'Motherboard ASUS 1500'){
+
+        componentes.motherboardAsus1500.push('Motherboard ASUS 1500')
+
+      }else if(cadaComponente === 'Monitor ASC 543'){
+
+        componentes.monitorAsc543.push('Monitor ASC 543')
+        
+      }else if(cadaComponente === 'Motherboard ASUS 1200'){
+
+        componentes.motherboardAsus1200.push('Motherboard ASUS 1200')
+        
+      }else if(cadaComponente === 'Motherboard MZI'){
+
+        componentes.motherboardMzi.push('Motherboard MZI')
+        
+      }else if(cadaComponente === 'HDD Toyiva'){
+
+        componentes.hddToyiva.push('HDD Toyiva')
+        
+      }else if(cadaComponente === 'HDD Wezter Dishital'){
+
+        componentes.hddWetzerDishital.push('HDD Wezter Dishital')
+        
+      }else if(cadaComponente === 'RAM Quinston'){
+
+        componentes.ramQuinston.push('RAM Quinston')
+        
+      }else if(cadaComponente === 'RAM Quinston Fury'){
+
+        componentes.ramQuinstonFury.push('RAM Quinston Fury')
+        
+      }
+    })
+  
+  })
+  
+}
+
+componenteMasVendido()
 //console.log( componenteMasVendido() ); // Monitor GPRS 3000
 
 
@@ -285,4 +348,4 @@ console.log( ventasVendedora("Ada") ); // 670
 
 //huboVentas(mes, anio): que indica si hubo ventas en un mes determinado.
 
-console.log( huboVentas(3, 2019) ); // false
+//console.log( huboVentas(3, 2019) ); // false
