@@ -41,6 +41,7 @@ var local = {
 
 function precioMaquina (arrayComponentes){
 
+  if(arrayComponentes.length){
   var sumPrecios = [];
   
     arrayComponentes.map(function(cadaComponente){
@@ -55,7 +56,9 @@ function precioMaquina (arrayComponentes){
 
     return total + suma; // Este este return es solo de esta función
   })
-  
+} else{
+  return 'No hay ventas'
+}
   
 }
 console.log(precioMaquina(["Monitor GPRS 3000", "Motherboard ASUS 1500"]))
@@ -64,6 +67,8 @@ console.log(precioMaquina(["Monitor ASC 543", "Motherboard MZI"]))
 console.log(precioMaquina(["Monitor ASC 543", "Motherboard ASUS 1200"]))
 console.log(precioMaquina(["Monitor GPRS 3000", "Motherboard ASUS 1200"]))
 
+
+//---------------------------------------------------------------------------------------------------------------------------
 
 //cantidadVentasComponente(componente): recibe un componente y devuelve la cantidad de veces que fue vendido, o sea que 
 //formó parte de una máquina que se vendió. La lista de ventas no se pasa por parámetro, se asume que está identificada por la variable ventas.
@@ -95,6 +100,9 @@ console.log( cantidadVentasComponente("HDD Toyiva") );
 console.log( cantidadVentasComponente("HDD Wezter Dishital") );
 console.log( cantidadVentasComponente("RAM Quinston") );
 console.log( cantidadVentasComponente("RAM Quinston Fury") );
+
+
+//---------------------------------------------------------------------------------------------------------------------------
 
 //vendedoraDelMes(mes, anio), se le pasa dos parámetros numéricos, (mes, anio) y devuelve el nombre de la vendedora que más vendió en plata en el mes. O sea no cantidad de ventas, sino importe total de las ventas. El importe de una venta es el que indica la función precioMaquina.
 function vendedoraDelMes(mes,anio){
@@ -157,16 +165,48 @@ ventaSheryl.map(function(cadaVenta){
    })
 })
 
-if(precioMaquina(cadaComponenteAda) > precioMaquina(cadaComponenteGrace)){
- 
- return 'Ada';
+var arrayVentas = [];
 
-}else if(precioMaquina(cadaComponenteGrace) > precioMaquina(cadaComponenteAda)){
- 
- return 'Grace';
+if (cadaComponenteAda.length>0){
+
+  arrayVentas.push(precioMaquina(cadaComponenteAda));
+}
+
+if (cadaComponenteGrace.length>0){
+
+  arrayVentas.push(precioMaquina(cadaComponenteGrace));
+}
+if (cadaComponenteHedy.length>0){
+
+  arrayVentas.push(precioMaquina(cadaComponenteHedy));
+}
+if (cadaComponenteSheryl.length>0){
+
+  arrayVentas.push(precioMaquina(cadaComponentesheryl));
+}
+
+arrayVentas = arrayVentas.sort();
+
+
+  if(arrayVentas[arrayVentas.length-1]== precioMaquina(cadaComponenteAda) ){
+
+    return 'Ada'
+
+  }else if(arrayVentas[arrayVentas.length-1]== precioMaquina(cadaComponenteGrace) ){
+
+    return 'Grace'
+
+  } else if(arrayVentas[arrayVentas.length-1]== precioMaquina(cadaComponenteHedy) ){
+
+    return 'Hedy'
+
+  } else if(arrayVentas[arrayVentas.length-1]== precioMaquina(cadaComponenteSheryl) ){
+
+    return 'Sheryl'
+  }
 
 }
-}
+
 
 
 console.log(vendedoraDelMes(1, 2019)); // "Ada" (vendio por $670, una máquina de $320 y otra de $350)

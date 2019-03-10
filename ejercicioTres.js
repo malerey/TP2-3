@@ -38,9 +38,10 @@ var local = {
 //que es la suma de los precios de cada componente incluido
 
 
+arrayComponentes
+function precioMaquina (){
 
-function precioMaquina (arrayComponentes){
-
+  if(arrayComponentes.length){
   var sumaPrecios = [];
   
     arrayComponentes.map(function(cadaComponente){
@@ -55,7 +56,7 @@ function precioMaquina (arrayComponentes){
 
     return total + suma; // Este este return es solo de esta función
   })
-  
+} 
   
 }
 
