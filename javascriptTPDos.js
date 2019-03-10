@@ -276,68 +276,112 @@ console.log( ventasVendedora("Ada") ); // 670
 
 function componenteMasVendido(){
 
-  var componentes = {
-    monitorGprs3000: [],
-    motherboardAsus1500:[],
-    monitorAsc543: [],
-    motherboardAsus1200:[],
-    motherboardMzi:[],
-    hddToyiva: [],
-    hddWetzerDishital: [],
-    ramQuinston:[],
-    ramQuinstonFury:[] 
-  };
-  var componenteLargo = [];
-
+  var componentes = [
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    []
+  ]
   local.ventas.map(function(cadaVenta){
 
     cadaVenta.componentes.map(function(cadaComponente){
 
-      if(cadaComponente === 'Monitor GPRS 3000'){
+      if(cadaComponente ==='Monitor GPRS 3000'){
 
-        componentes.monitorGprs3000.push('Monitor GPRS 3000')
+        componentes[0].push('Monitor GPRS 3000')
 
-      } else if(cadaComponente === 'Motherboard ASUS 1500'){
+      }else if(cadaComponente ==='Motherboard ASUS 1500'){
 
-        componentes.motherboardAsus1500.push('Motherboard ASUS 1500')
+        componentes[1].push('Motherboard ASUS 1500')
 
-      }else if(cadaComponente === 'Monitor ASC 543'){
+      }else if(cadaComponente ==='Monitor ASC 543'){
 
-        componentes.monitorAsc543.push('Monitor ASC 543')
-        
-      }else if(cadaComponente === 'Motherboard ASUS 1200'){
+        componentes[2].push('Monitor ASC 543')
 
-        componentes.motherboardAsus1200.push('Motherboard ASUS 1200')
-        
-      }else if(cadaComponente === 'Motherboard MZI'){
+      }else if(cadaComponente ==='Motherboard ASUS 1200'){
 
-        componentes.motherboardMzi.push('Motherboard MZI')
-        
-      }else if(cadaComponente === 'HDD Toyiva'){
+        componentes[3].push('Motherboard ASUS 1200')
 
-        componentes.hddToyiva.push('HDD Toyiva')
-        
-      }else if(cadaComponente === 'HDD Wezter Dishital'){
+      }else if(cadaComponente ==='Motherboard MZI'){
 
-        componentes.hddWetzerDishital.push('HDD Wezter Dishital')
-        
-      }else if(cadaComponente === 'RAM Quinston'){
+        componentes[4].push('Motherboard MZI')
 
-        componentes.ramQuinston.push('RAM Quinston')
-        
-      }else if(cadaComponente === 'RAM Quinston Fury'){
+      }else if(cadaComponente ==='HDD Toyiva'){
 
-        componentes.ramQuinstonFury.push('RAM Quinston Fury')
-        
+        componentes[5].push('HDD Toyiva')
+
+      }else if(cadaComponente ==='"HDD Wezter Dishital'){
+
+        componentes[6].push('"HDD Wezter Dishital')
+
+      }else if(cadaComponente ==='RAM Quinston'){
+
+        componentes[7].push('RAM Quinston')
+
+      }else if(cadaComponente ==='RAM Quinston Fury'){
+
+        componentes[8].push('RAM Quinston Fury')
+
       }
+
     })
-  
   })
   
+  var largos = [];
+
+  componentes.map(function(cadaComponente){
+    if(cadaComponente.length>0){
+
+    largos.push(cadaComponente.length)
+    }
+  })
+  largos = largos.sort()
+
+    if(largos[largos.length-1] === componentes[0].length){
+
+      return 'Monitor GPRS 3000'
+
+    }else if(largos[largos.length-1] === componentes[1].length){
+
+      return 'Motherboard ASUS 1500'
+
+    }else if(largos[largos.length-1] === componentes[2].length){
+
+      return 'Monitor ASC 543'
+
+    }else if(largos[largos.length-1] === componentes[3].length){
+
+      return 'Motherboard ASUS 1200'
+
+    }else if(largos[largos.length-1] === componentes[4].length){
+
+      return 'Motherboard MZI'
+
+    }else if(largos[largos.length-1] === componentes[5].length){
+
+      return 'HDD Toyiva'
+
+    }else if(largos[largos.length-1] === componentes[6].length){
+
+      return 'HDD Wezter Dishital'
+
+    }else if(largos[largos.length-1] === componentes[7].length){
+
+      return 'RAM Quinston'
+
+    }else if(largos[largos.length-1] === componentes[8].length){
+
+      return 'RAM Quinston Fury'
+    }
+    
 }
 
-componenteMasVendido()
-//console.log( componenteMasVendido() ); // Monitor GPRS 3000
+console.log( componenteMasVendido() ); // Monitor GPRS 3000
 
 
 
