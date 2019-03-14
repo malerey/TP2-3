@@ -183,7 +183,7 @@ if (cadaComponenteHedy.length>0){
 }
 if (cadaComponenteSheryl.length>0){
 
-  arrayVentas.push(precioMaquina(cadaComponentesheryl));
+  arrayVentas.push(precioMaquina(cadaComponenteShery));
 }
 
 arrayVentas = arrayVentas.sort();
@@ -899,10 +899,106 @@ console.log( renderPorSucursal() );
 
 function render(){
 
-  return 'function render: ' + 'Ventas por mes: ' + renderPorMes() + ' ventas por sucursal: ' + renderPorSucursal() + ' Producto estrella ' + componenteMasVendido () + 'Vendedora que más ingresos generó: ' 
+  function vendedora(){
+  
+   var ventaAda =[];
+   var cadaComponenteAda = [];
+   var ventaGrace=[];
+   var cadaComponenteGrace = [];
+   var ventaHedy=[];
+   var cadaComponenteHedy = [];
+   var ventaSheryl=[];
+   var cadaComponenteSheryl = [];
+  
+   local.ventas.map(function(cadaVenta){
+  
+       if(cadaVenta.nombreVendedora === 'Ada'){
+         ventaAda.push(cadaVenta.componentes)
+  
+       }else if(cadaVenta.nombreVendedora === 'Grace'){
+         ventaGrace.push(cadaVenta.componentes)
+  
+       }else if(cadaVenta.nombreVendedora === 'Hedy'){
+         ventaHedy.push(cadaVenta.componentes)
+  
+     } else if(cadaVenta.nombreVendedora === 'Sheryl'){
+     ventaSheryl.push(cadaVenta.componentes)
+     }
+  
+   })
+  
+  ventaAda.map(function(cadaVenta){
+     cadaVenta.map(function(componente){
+         cadaComponenteAda.push(componente)
+     })
+  })
+  
+  ventaGrace.map(function(cadaVenta){
+     cadaVenta.map(function(componente){
+         cadaComponenteGrace.push(componente)
+     })
+  })
+  
+  ventaHedy.map(function(cadaVenta){
+     cadaVenta.map(function(componente){
+         cadaComponenteHedy.push(componente)
+     })
+  })
+  
+  ventaSheryl.map(function(cadaVenta){
+     cadaVenta.map(function(componente){
+         cadaComponenteSheryl.push(componente)
+     })
+  })
+
+  var arrayVentas = [];
+  
+  if (cadaComponenteAda.length>0){
+  
+    arrayVentas.push(precioMaquina(cadaComponenteAda));
+  }
+  
+  if (cadaComponenteGrace.length>0){
+  
+    arrayVentas.push(precioMaquina(cadaComponenteGrace));
+  }
+  if (cadaComponenteHedy.length>0){
+  
+    arrayVentas.push(precioMaquina(cadaComponenteHedy));
+  }
+  if (cadaComponenteSheryl.length>0){
+  
+    arrayVentas.push(precioMaquina(cadaComponenteSheryl));
+
+  }
+
+  arrayVentas = arrayVentas.sort();
+  
+    if(arrayVentas[arrayVentas.length-1]== precioMaquina(cadaComponenteAda) ){
+  
+      return 'Ada'
+  
+    }else if(arrayVentas[arrayVentas.length-1]== precioMaquina(cadaComponenteGrace) ){
+  
+      return 'Grace'
+  
+    } else if(arrayVentas[arrayVentas.length-1]== precioMaquina(cadaComponenteHedy) ){
+  
+      return 'Hedy'
+  
+    } else if(arrayVentas[arrayVentas.length-1]== precioMaquina(cadaComponenteSheryl) ){
+  
+      return 'Sheryl'
+    }
+  
+  }
+  console.log(vendedora)
+//return 'Grace: '+ precioMaquina(cadaComponenteGrace) + ' ' + 'Hedy: ' +precioMaquina(cadaComponenteHedy)
+  //return 'function render: ' + 'Ventas por mes: ' + renderPorMes() + ' ventas por sucursal: ' + renderPorSucursal() + ' Producto estrella ' + componenteMasVendido () + ' Vendedora que más ingresos generó: ' + vendedora()
 }
 
-console.log( render() );
+render()
+//console.log( render() );
 // Reporte
 // Ventas por mes:
 //   Total de enero 2019: 1250
