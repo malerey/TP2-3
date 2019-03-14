@@ -57,7 +57,7 @@ function precioMaquina (arrayComponentes){
     return total + suma; // Este este return es solo de esta función
   })
 } else{
-  return 'No hay ventas'
+  return 0
 }
   
 }
@@ -245,6 +245,19 @@ console.log( ventasMes(2, 2019) ); // 320
 
 //ventasVendedora(nombre): Obtener las ventas totales realizadas por una vendedora sin límite de fecha.
 
+function reducir(arrayUno, arrayDos){
+
+  arrayUno.map(function(cadaVenta){
+
+    cadaVenta.map(function(cadaComponente){
+
+      arrayDos.push(cadaComponente)
+    })
+  })
+  return precioMaquina (arrayDos)
+}
+
+
 function ventasVendedora(nombre){
 
   var venta = [];
@@ -258,14 +271,9 @@ function ventasVendedora(nombre){
       
     }
   })
-  venta.map(function(cadaVenta){
-    cadaVenta.map(function(cadaComponente){
-      componentesASumar.push(cadaComponente)
-    })
-  })
-    return precioMaquina (componentesASumar)
-}
 
+return reducir(venta, componentesASumar) 
+}
 console.log( ventasVendedora("Grace") ); // 900
 console.log( ventasVendedora("Ada") ); // 670
 
@@ -451,21 +459,21 @@ local.sucursales = ['Centro', 'Caballito'];
 // 07/02/2019, Sheryl, [Monitor GPRS 3000, RAM Quinston], Caballito
 // 14/02/2019, Ada, [Motherboard ASUS 1200, HDD Toyiva], Centro
 
-local.ventas.push({fecha: new Date(12,01,2019), nombreVendedora: 'Hedy', componentes: ['Monitor GPRS 3000', 'HDD Toyiva'], sucursal: 'Centro'})
-local.ventas.push({fecha: new Date(24,02,2019), nombreVendedora: 'Sheryl', componentes: ['Motherboard ASUS 1500', 'HDD Wezter Dishital'], sucursal: 'Caballito'})
-local.ventas.push({fecha: new Date(01,01,2019), nombreVendedora: 'Ada', componentes: ['Motherboard MZI', 'RAM Quinston Fury'], sucursal: 'Centro'})
-local.ventas.push({fecha: new Date(11,01,2019), nombreVendedora: 'Grace', componentes: ['Monitor ASC 543', 'RAM Quinston'], sucursal: 'Caballito'})
-local.ventas.push({fecha: new Date(15,01,2019), nombreVendedora: 'Ada', componentes: ['Motherboard ASUS 1200', 'RAM Quinston Fury'], sucursal: 'Centro'})
-local.ventas.push({fecha: new Date(12,01,2019), nombreVendedora: 'Hedy', componentes: ['Motherboard ASUS 1500', 'HDD Toyiva'], sucursal: 'Caballito'})
-local.ventas.push({fecha: new Date(21,01,2019), nombreVendedora: 'Grace', componentes: ['Motherboard MZI', 'RAM Quinston'], sucursal: 'Centro'})
-local.ventas.push({fecha: new Date(08,01,2019), nombreVendedora: 'Sheryl', componentes: ['Monitor ASC 543', 'HDD Wezter Dishital'], sucursal: 'Centro'})
-local.ventas.push({fecha: new Date(16,01,2019), nombreVendedora: 'Sheryl', componentes: ['Monitor GPRS 3000', 'RAM Quinston Fury'], sucursal: 'Centro'})
-local.ventas.push({fecha: new Date(27,01,2019), nombreVendedora: 'Hedy', componentes: ['Motherboard ASUS 1200', 'HDD Toyiva'], sucursal: 'Caballito'})
-local.ventas.push({fecha: new Date(22,01,2019), nombreVendedora: 'Grace', componentes: ['Monitor ASC 543', 'HDD Wezter Dishital'], sucursal: 'Centro'})
-local.ventas.push({fecha: new Date(05,01,2019), nombreVendedora: 'Ada', componentes: ['Motherboard ASUS 1500', 'RAM Quinston'], sucursal: 'Centro'})
-local.ventas.push({fecha: new Date(01,01,2019), nombreVendedora: 'Grace', componentes: ['Motherboard MZI', 'HDD Wezter Dishital'], sucursal: 'Centro'})
-local.ventas.push({fecha: new Date(07,01,2019), nombreVendedora: 'Sheryl', componentes: ['Monitor GPRS 3000', 'RAM Quinston'], sucursal: 'Caballito'})
-local.ventas.push({fecha: new Date(14,01,2019), nombreVendedora: 'Ada', componentes: ['Motherboard ASUS 1200', 'HDD Toyiva'], sucursal: 'Centro'})
+local.ventas.push({fecha: new Date(2019, 1, 12), nombreVendedora: 'Hedy', componentes: ['Monitor GPRS 3000', 'HDD Toyiva'], sucursal: 'Centro'})
+local.ventas.push({fecha: new Date(2019, 1, 24), nombreVendedora: 'Sheryl', componentes: ['Motherboard ASUS 1500', 'HDD Wezter Dishital'], sucursal: 'Caballito'})
+local.ventas.push({fecha: new Date(2019, 1, 01), nombreVendedora: 'Ada', componentes: ['Motherboard MZI', 'RAM Quinston Fury'], sucursal: 'Centro'})
+local.ventas.push({fecha: new Date(2019, 1, 11), nombreVendedora: 'Grace', componentes: ['Monitor ASC 543', 'RAM Quinston'], sucursal: 'Caballito'})
+local.ventas.push({fecha: new Date(2019, 1, 15), nombreVendedora: 'Ada', componentes: ['Motherboard ASUS 1200', 'RAM Quinston Fury'], sucursal: 'Centro'})
+local.ventas.push({fecha: new Date(2019, 1, 12), nombreVendedora: 'Hedy', componentes: ['Motherboard ASUS 1500', 'HDD Toyiva'], sucursal: 'Caballito'})
+local.ventas.push({fecha: new Date(2019, 1, 21), nombreVendedora: 'Grace', componentes: ['Motherboard MZI', 'RAM Quinston'], sucursal: 'Centro'})
+local.ventas.push({fecha: new Date(2019, 1, 08), nombreVendedora: 'Sheryl', componentes: ['Monitor ASC 543', 'HDD Wezter Dishital'], sucursal: 'Centro'})
+local.ventas.push({fecha: new Date(2019, 1, 16), nombreVendedora: 'Sheryl', componentes: ['Monitor GPRS 3000', 'RAM Quinston Fury'], sucursal: 'Centro'})
+local.ventas.push({fecha: new Date(2019, 1, 27), nombreVendedora: 'Hedy', componentes: ['Motherboard ASUS 1200', 'HDD Toyiva'], sucursal: 'Caballito'})
+local.ventas.push({fecha: new Date(2019, 1, 22), nombreVendedora: 'Grace', componentes: ['Monitor ASC 543', 'HDD Wezter Dishital'], sucursal: 'Centro'})
+local.ventas.push({fecha: new Date(2019, 1, 05), nombreVendedora: 'Ada', componentes: ['Motherboard ASUS 1500', 'RAM Quinston'], sucursal: 'Centro'})
+local.ventas.push({fecha: new Date(2019, 1, 01), nombreVendedora: 'Grace', componentes: ['Motherboard MZI', 'HDD Wezter Dishital'], sucursal: 'Centro'})
+local.ventas.push({fecha: new Date(2019, 1, 07), nombreVendedora: 'Sheryl', componentes: ['Monitor GPRS 3000', 'RAM Quinston'], sucursal: 'Caballito'})
+local.ventas.push({fecha: new Date(2019, 1, 14), nombreVendedora: 'Ada', componentes: ['Motherboard ASUS 1200', 'HDD Toyiva'], sucursal: 'Centro'})
 
 
 //---------------------------------------------------------------------------------------------------------------------------
@@ -485,44 +493,415 @@ function ventasSucursal(sucursal){
     }
   })
   
-  venta.map(function(componentes){
+  return reducir(venta, componentesASumar) 
 
-    componentes.map(function(cadaComponente){
-
-      componentesASumar.push(cadaComponente)      
-    })
-  })
-  
-  return precioMaquina(componentesASumar)
 }
 
 console.log( ventasSucursal("Centro") ); // 4195
-console.log( ventasSucursal("Caballito") ); // 4195
+console.log( ventasSucursal("Caballito") ); // 
 
 //Las funciones ventasSucursal y ventasVendedora tienen mucho código en común, ya que es la misma funcionalidad pero trabajando con una 
 //propiedad distinta. Entonces, ¿cómo harías para que ambas funciones reutilicen código y evitemos repetir?
 
-//No sé!
+//Resuelto más arriba 
 
 
 //---------------------------------------------------------------------------------------------------------------------------
 
 //Crear la función sucursalDelMes(mes, anio), que se le pasa dos parámetros numéricos, (mes, anio) y devuelve el nombre de la sucursal que más vendió en plata en el mes. No cantidad de ventas, sino importe total de las ventas. El importe de una venta es el que indica la función precioMaquina.
 
-console.log( sucursalDelMes(1, 2019) ); // "Centro"
-/*Para tener una mejor muestra de como está resultando el local, queremos desarrollar un reporte que nos muestre las ventas por sucursal y por mes. Para esto, necesitamos crear las siguientes funciones:
+function sucursalDelMes(mes, anio){
 
-renderPorMes(): Muestra una lista ordenada del importe total vendido por cada mes/año
+  var centro = [];
+  var componentesASumarCentro = [];
+  var caballito = [];
+  var componentesASumarCaballito = [];
+  
+  local.ventas.map(function(cadaVenta){
+
+    if(mes -1 === cadaVenta.fecha.getMonth() && anio === cadaVenta.fecha.getFullYear()){
+
+      if(cadaVenta.sucursal === 'Centro'){
+
+        centro.push(cadaVenta.componentes)
+
+      }else if(cadaVenta.sucursal === 'Caballito'){
+
+        caballito.push(cadaVenta.componentes)
+      }
+    }
+  })
+  centro = reducir(centro, componentesASumarCentro);
+  caballito = reducir(caballito, componentesASumarCaballito);
+  
+
+if(centro > caballito){
+
+    return 'Centro';
+
+}else if(caballito> centro){
+
+    return 'Caballito'
+  }
+}
+console.log( sucursalDelMes(1, 2019) ); // "Centro"
+console.log( sucursalDelMes(2, 2019) ); 
+
+
+//---------------------------------------------------------------------------------------------------------------------------
+
+//3. Para tener una mejor muestra de como está resultando el local, queremos desarrollar un reporte que nos muestre las ventas por sucursal y por mes. Para esto, necesitamos crear las siguientes funciones:
+
+//renderPorMes(): Muestra una lista ordenada del importe total vendido por cada mes/año
+
+function renderPorMes(){
+
+  var enero =[];
+  var eneroVentas = [];
+  var febrero =[];
+  var febreroVentas = [];
+  var marzo = [];
+  var marzoVentas = [];
+  var abril =[];
+  var abrilVentas = [];
+  var mayo =[];
+  var mayoVentas = [];
+  var junio =[];
+  var junioVentas = [];
+  var julio =[];
+  var julioVentas = [];
+  var julio =[];
+  var julioVentas = [];
+  var agosto = [];
+  var agostoVentas = [];
+  var septiembre = [];
+  var septiembreVentas = [];
+  var octubre = [];
+  var octubreVentas = [];
+  var noviembre = [];
+  var noviembreVentas = [];
+  var diciembre = [];
+  var diciembreVentas = [];
+
+
+  local.ventas.map(function(cadaVenta){
+
+    if(cadaVenta.fecha.getMonth() === 0){
+
+      enero.push(cadaVenta.componentes)
+
+    }else if(cadaVenta.fecha.getMonth() === 1){
+
+      febrero.push(cadaVenta.componentes)
+
+    }else if(cadaVenta.fecha.getMonth() === 2){
+
+      marzo.push(cadaVenta.componentes)
+      
+    }else if(cadaVenta.fecha.getMonth() === 3){
+
+      abril.push(cadaVenta.componentes)
+
+    }else if(cadaVenta.fecha.getMonth() === 4){
+
+      mayo.push(cadaVenta.componentes)
+
+    }else if(cadaVenta.fecha.getMonth() === 5){
+
+      junio.push(cadaVenta.componentes)
+
+    }else if(cadaVenta.fecha.getMonth() === 6){
+
+      julio.push(cadaVenta.componentes)
+
+    }else if(cadaVenta.fecha.getMonth() === 7){
+
+      agosto.push(cadaVenta.componentes)
+
+    }else if(cadaVenta.fecha.getMonth() === 8){
+
+      septiembre.push(cadaVenta.componentes)
+
+    }else if(cadaVenta.fecha.getMonth() === 9){
+
+      octubre.push(cadaVenta.componentes)
+
+    }else if(cadaVenta.fecha.getMonth() === 10){
+
+      noviembre.push(cadaVenta.componentes)
+
+    }else if(cadaVenta.fecha.getMonth() === 11){
+
+      diciembre.push(cadaVenta.componentes)
+
+  }
+
+})
+
+enero.map(function(cadaVenta){
+
+  cadaVenta.map(function(cadaComponente){
+
+    if(enero.length){
+
+      eneroVentas.push(cadaComponente)
+
+    } else {
+
+      return 0
+    }
+
+  })
+
+})
+
+febrero.map(function(cadaVenta){
+
+  cadaVenta.map(function(cadaComponente){
+
+    if(febrero.length){
+
+      febreroVentas.push(cadaComponente)
+
+    } else {
+      
+      return 0
+    }
+
+  })
+
+})
+marzo.map(function(cadaVenta){
+
+  cadaVenta.map(function(cadaComponente){
+
+    if(marzo.length){
+
+      marzoVentas.push(cadaComponente)
+
+    } else {
+      
+      return 0
+    }
+
+  })
+
+})
+abril.map(function(cadaVenta){
+
+  cadaVenta.map(function(cadaComponente){
+
+    if(abril.length){
+
+      abrilVentas.push(cadaComponente)
+
+    } else {
+      
+      return 0
+    }
+
+  })
+
+})
+mayo.map(function(cadaVenta){
+
+  cadaVenta.map(function(cadaComponente){
+
+    if(mayo.length){
+
+      mayoVentas.push(cadaComponente)
+
+    } else {
+      
+      return 0
+    }
+
+  })
+
+})
+junio.map(function(cadaVenta){
+
+  cadaVenta.map(function(cadaComponente){
+
+    if(junio.length){
+
+      junioVentas.push(cadaComponente)
+
+    } else {
+      
+      return 0
+    }
+
+  })
+
+})
+julio.map(function(cadaVenta){
+
+  cadaVenta.map(function(cadaComponente){
+
+    if(julio.length){
+
+      julioVentas.push(cadaComponente)
+
+    } else {
+      
+      return 0
+    }
+
+  })
+
+})
+agosto.map(function(cadaVenta){
+
+  cadaVenta.map(function(cadaComponente){
+
+    if(agosto.length){
+
+      agostoVentas.push(cadaComponente)
+
+    } else {
+      
+      return 0
+    }
+
+  })
+
+})
+septiembre.map(function(cadaVenta){
+
+  cadaVenta.map(function(cadaComponente){
+
+    if(septiembre.length){
+
+      septiembreVentas.push(cadaComponente)
+
+    } else {
+      
+      return 0
+    }
+
+  })
+
+})
+octubre.map(function(cadaVenta){
+
+  cadaVenta.map(function(cadaComponente){
+
+    if(octubre.length){
+
+      octubreVentas.push(cadaComponente)
+
+    } else {
+      
+      return 0
+    }
+
+  })
+
+})
+noviembre.map(function(cadaVenta){
+
+  cadaVenta.map(function(cadaComponente){
+
+    if(noviembre.length){
+
+      noviembreVentas.push(cadaComponente)
+
+    } else {
+      
+      return 0
+    }
+
+  })
+
+})
+diciembre.map(function(cadaVenta){
+
+  cadaVenta.map(function(cadaComponente){
+
+    if(diciembre.length){
+
+      diciembreVentas.push(cadaComponente)
+
+    } else {
+      
+      return 0
+    }
+
+  })
+
+})
+
+return 'Total de enero 2019: ' + precioMaquina(eneroVentas) + '// Total de febrero 2019: ' + precioMaquina(febreroVentas) + '// cortó acá porque es muy largo'
+}
+
 console.log( renderPorMes() );
+
 // Ventas por mes:
-//   Total de enero 2019: 1250
+//   Total de enero 2019: 1250,
 //   Total de febrero 2019: 4210
-renderPorSucursal(): Muestra una lista del importe total vendido por cada sucursal
+
+// no sé cómo cambiar de linea para que me quede así de prolijo
+
+
+//---------------------------------------------------------------------------------------------------------------------------
+
+//renderPorSucursal(): Muestra una lista del importe total vendido por cada sucursal
+
+function renderPorSucursal(){
+
+  var centro =[];
+  var centroComponentes = [];
+  var caballito = [];
+  var caballitoComponentes = [];
+
+  local.ventas.map(function(cadaVenta){
+
+    if(cadaVenta.sucursal === 'Centro'){
+
+      centro.push(cadaVenta.componentes)
+
+    } else if(cadaVenta.sucursal === 'Caballito'){
+
+      caballito.push(cadaVenta.componentes)
+    }
+
+  })
+
+centro.map(function(cadaVenta){
+
+  cadaVenta.map(function(cadaComponente){
+
+    centroComponentes.push(cadaComponente)
+  })
+})
+
+caballito.map(function(cadaVenta){
+
+  cadaVenta.map(function(cadaComponente){
+
+    caballitoComponentes.push(cadaComponente)
+  })
+})
+
+return 'Ventas por sucursal: Total de Centro: ' + precioMaquina(centroComponentes) + ' Total de Caballito: ' + precioMaquina(caballitoComponentes)
+}
+
 console.log( renderPorSucursal() );
 // Ventas por sucursal:
 //   Total de Centro: 4195
 //   Total de Caballito: 1265
-render(): Tiene que mostrar la unión de los dos reportes anteriores, cual fue el producto más vendido y la vendedora que más ingresos generó
+
+
+//---------------------------------------------------------------------------------------------------------------------------
+
+//render(): Tiene que mostrar la unión de los dos reportes anteriores, cual fue el producto más vendido y la vendedora que más ingresos generó
+
+function render(){
+
+  return 'function render: ' + 'Ventas por mes: ' + renderPorMes() + ' ventas por sucursal: ' + renderPorSucursal() + ' Producto estrella ' + componenteMasVendido () + 'Vendedora que más ingresos generó: ' 
+}
+
 console.log( render() );
 // Reporte
 // Ventas por mes:
@@ -533,4 +912,3 @@ console.log( render() );
 //   Total de Caballito: 1265
 // Producto estrella: Monitor GPRS 3000
 // Vendedora que más ingresos generó: Grace
-*/
