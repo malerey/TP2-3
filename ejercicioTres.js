@@ -32,25 +32,191 @@ var local = {
 };
 
 
-//---------------------------------------------------------------------------------------------------------------------------
 
-//ventasMes(mes, anio): Obtener las ventas de un mes.
+function precioMaquina (arrayComponentes){
+
+  if(arrayComponentes.length){
+  var sumPrecios = [];
+  
+    arrayComponentes.map(function(cadaComponente){
+      local.precios.map(function(precio){
+        if(precio.componente === cadaComponente){
+          sumPrecios.push(precio.precio)
+        }
+      })
+    })
+
+  return sumPrecios.reduce(function(total,suma){ //Este return retorna TODA la función
+
+    return total + suma; // Este este return es solo de esta función
+  })
+} else{
+  return 0
+}
+}
+
+function vendedoraDelMes(mes,anio){
+  
+  var ventasMes =[];
+ 
+ local.ventas.map(function(cadaVenta){
+     if(mes -1 === cadaVenta.fecha.getMonth() && anio === cadaVenta.fecha.getFullYear()){
+         ventasMes.push(cadaVenta);
+     }
+ })
+
+ var ventaAda =[];
+ var cadaComponenteAda = [];
+ var ventaGrace=[];
+ var cadaComponenteGrace = [];
+ var ventaHedy=[];
+ var cadaComponenteHedy = [];
+ var ventaSheryl=[];
+ var cadaComponenteSheryl = [];
+
+ ventasMes.map(function(cadaVenta){
+
+     if(cadaVenta.nombreVendedora === 'Ada'){
+       ventaAda.push(cadaVenta.componentes)
+
+     }else if(cadaVenta.nombreVendedora === 'Grace'){
+       ventaGrace.push(cadaVenta.componentes)
+
+     }else if(cadaVenta.nombreVendedora === 'Hedy'){
+       ventaHedy.push(cadaVenta.componentes)
+
+   } else if(cadaVenta.nombreVendedora === 'Sheryl'){
+   ventaSheryl.push(cadaVenta.componentes)
+   }
+
+ })
+
+ventaAda.map(function(cadaVenta){
+   cadaVenta.map(function(componente){
+       cadaComponenteAda.push(componente)
+   })
+})
+
+ventaGrace.map(function(cadaVenta){
+   cadaVenta.map(function(componente){
+       cadaComponenteGrace.push(componente)
+   })
+})
+
+ventaHedy.map(function(cadaVenta){
+   cadaVenta.map(function(componente){
+       cadaComponenteHedy.push(componente)
+   })
+})
+
+ventaSheryl.map(function(cadaVenta){
+   cadaVenta.map(function(componente){
+       cadaComponenteSheryl.push(componente)
+   })
+})
 
 
-//console.log( ventasMes(1, 2019) ); // 1250
+
+if (precioMaquina(cadaComponenteAda)>precioMaquina(cadaComponenteGrace)&& precioMaquina(cadaComponenteAda)> precioMaquina(cadaComponenteHedy)&& precioMaquina(cadaComponenteAda)> precioMaquina(cadaComponenteSheryl)){
+
+  return 'Ada';
+
+}else if (precioMaquina(cadaComponenteGrace)>precioMaquina(cadaComponenteAda)&& precioMaquina(cadaComponenteGrace)> precioMaquina(cadaComponenteHedy)&& precioMaquina(cadaComponenteGrace)> precioMaquina(cadaComponenteSheryl)){
+
+  return 'Grace';
+
+}else if (precioMaquina(cadaComponenteHedy)>precioMaquina(cadaComponenteAda)&& precioMaquina(cadaComponenteHedy)> precioMaquina(cadaComponenteGrace)&& precioMaquina(cadaComponenteHedy)> precioMaquina(cadaComponenteSheryl)){
+
+  return 'Hedy';
+
+}else if (precioMaquina(cadaComponenteSheryl)>precioMaquina(cadaComponenteAda)&& precioMaquina(cadaComponenteSheryl)> precioMaquina(cadaComponenteGrace)&& precioMaquina(cadaComponenteSheryl)> precioMaquina(cadaComponenteHedy)){
+
+  return 'Sheryl';
+
+}   
+
+}
+
+
+console.log(vendedoraDelMes(1, 2019)); // "Ada" (vendio por $670, una máquina de $320 y otra de $350)
+console.log(vendedoraDelMes(2, 2019)); 
+
+
+//----------------------------------------------------------------------------------------
+function vendedoraDelMes(){
+  
+ var ventaAda =[];
+ var cadaComponenteAda = [];
+ var ventaGrace=[];
+ var cadaComponenteGrace = [];
+ var ventaHedy=[];
+ var cadaComponenteHedy = [];
+ var ventaSheryl=[];
+ var cadaComponenteSheryl = [];
+
+ local.ventas.map(function(cadaVenta){
+
+     if(cadaVenta.nombreVendedora === 'Ada'){
+       ventaAda.push(cadaVenta.componentes)
+
+     }else if(cadaVenta.nombreVendedora === 'Grace'){
+       ventaGrace.push(cadaVenta.componentes)
+
+     }else if(cadaVenta.nombreVendedora === 'Hedy'){
+       ventaHedy.push(cadaVenta.componentes)
+
+   } else if(cadaVenta.nombreVendedora === 'Sheryl'){
+   ventaSheryl.push(cadaVenta.componentes)
+   }
+
+ })
+
+ventaAda.map(function(cadaVenta){
+   cadaVenta.map(function(componente){
+       cadaComponenteAda.push(componente)
+   })
+})
+
+ventaGrace.map(function(cadaVenta){
+   cadaVenta.map(function(componente){
+       cadaComponenteGrace.push(componente)
+   })
+})
+
+ventaHedy.map(function(cadaVenta){
+   cadaVenta.map(function(componente){
+       cadaComponenteHedy.push(componente)
+   })
+})
+
+ventaSheryl.map(function(cadaVenta){
+   cadaVenta.map(function(componente){
+       cadaComponenteSheryl.push(componente)
+   })
+})
 
 
 
+if (precioMaquina(cadaComponenteAda)>precioMaquina(cadaComponenteGrace)&& precioMaquina(cadaComponenteAda)> precioMaquina(cadaComponenteHedy)&& precioMaquina(cadaComponenteAda)> precioMaquina(cadaComponenteSheryl)){
+
+  return 'Ada';
+
+}else if (precioMaquina(cadaComponenteGrace)>precioMaquina(cadaComponenteAda)&& precioMaquina(cadaComponenteGrace)> precioMaquina(cadaComponenteHedy)&& precioMaquina(cadaComponenteGrace)> precioMaquina(cadaComponenteSheryl)){
+
+  return 'Grace';
+
+}else if (precioMaquina(cadaComponenteHedy)>precioMaquina(cadaComponenteAda)&& precioMaquina(cadaComponenteHedy)> precioMaquina(cadaComponenteGrace)&& precioMaquina(cadaComponenteHedy)> precioMaquina(cadaComponenteSheryl)){
+
+  return 'Hedy';
+
+}else if (precioMaquina(cadaComponenteSheryl)>precioMaquina(cadaComponenteAda)&& precioMaquina(cadaComponenteSheryl)> precioMaquina(cadaComponenteGrace)&& precioMaquina(cadaComponenteSheryl)> precioMaquina(cadaComponenteHedy)){
+
+  return 'Sheryl';
+
+}   
+
+}
 
 
-
-
-
-
-
-
-
-//ventasVendedora(nombre): Obtener las ventas totales realizadas por una vendedora sin límite de fecha.
-
-
-//console.log( ventasVendedora("Grace") ); // 900
+console.log(vendedoraDelMes(1, 2019)); // "Ada" (vendio por $670, una máquina de $320 y otra de $350)
+console.log(vendedoraDelMes(2, 2019)); 

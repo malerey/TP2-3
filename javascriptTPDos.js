@@ -166,45 +166,25 @@ ventaSheryl.map(function(cadaVenta){
    })
 })
 
-var arrayVentas = [];
-
-if (cadaComponenteAda.length>0){
-
-  arrayVentas.push(precioMaquina(cadaComponenteAda));
-}
-
-if (cadaComponenteGrace.length>0){
-
-  arrayVentas.push(precioMaquina(cadaComponenteGrace));
-}
-if (cadaComponenteHedy.length>0){
-
-  arrayVentas.push(precioMaquina(cadaComponenteHedy));
-}
-if (cadaComponenteSheryl.length>0){
-
-  arrayVentas.push(precioMaquina(cadaComponenteShery));
-}
-
-arrayVentas = arrayVentas.sort();
 
 
-  if(arrayVentas[arrayVentas.length-1]== precioMaquina(cadaComponenteAda) ){
+if (precioMaquina(cadaComponenteAda)>precioMaquina(cadaComponenteGrace)&& precioMaquina(cadaComponenteAda)> precioMaquina(cadaComponenteHedy)&& precioMaquina(cadaComponenteAda)> precioMaquina(cadaComponenteSheryl)){
 
-    return 'Ada'
+  return 'Ada';
 
-  }else if(arrayVentas[arrayVentas.length-1]== precioMaquina(cadaComponenteGrace) ){
+}else if (precioMaquina(cadaComponenteGrace)>precioMaquina(cadaComponenteAda)&& precioMaquina(cadaComponenteGrace)> precioMaquina(cadaComponenteHedy)&& precioMaquina(cadaComponenteGrace)> precioMaquina(cadaComponenteSheryl)){
 
-    return 'Grace'
+  return 'Grace';
 
-  } else if(arrayVentas[arrayVentas.length-1]== precioMaquina(cadaComponenteHedy) ){
+}else if (precioMaquina(cadaComponenteHedy)>precioMaquina(cadaComponenteAda)&& precioMaquina(cadaComponenteHedy)> precioMaquina(cadaComponenteGrace)&& precioMaquina(cadaComponenteHedy)> precioMaquina(cadaComponenteSheryl)){
 
-    return 'Hedy'
+  return 'Hedy';
 
-  } else if(arrayVentas[arrayVentas.length-1]== precioMaquina(cadaComponenteSheryl) ){
+}else if (precioMaquina(cadaComponenteSheryl)>precioMaquina(cadaComponenteAda)&& precioMaquina(cadaComponenteSheryl)> precioMaquina(cadaComponenteGrace)&& precioMaquina(cadaComponenteSheryl)> precioMaquina(cadaComponenteHedy)){
 
-    return 'Sheryl'
-  }
+  return 'Sheryl';
+
+}   
 
 }
 
@@ -897,108 +877,89 @@ console.log( renderPorSucursal() );
 
 //render(): Tiene que mostrar la unión de los dos reportes anteriores, cual fue el producto más vendido y la vendedora que más ingresos generó
 
+function vendedora(){
+  
+  var ventaAda =[];
+  var cadaComponenteAda = [];
+  var ventaGrace=[];
+  var cadaComponenteGrace = [];
+  var ventaHedy=[];
+  var cadaComponenteHedy = [];
+  var ventaSheryl=[];
+  var cadaComponenteSheryl = [];
+ 
+  local.ventas.map(function(cadaVenta){
+ 
+      if(cadaVenta.nombreVendedora === 'Ada'){
+        ventaAda.push(cadaVenta.componentes)
+ 
+      }else if(cadaVenta.nombreVendedora === 'Grace'){
+        ventaGrace.push(cadaVenta.componentes)
+ 
+      }else if(cadaVenta.nombreVendedora === 'Hedy'){
+        ventaHedy.push(cadaVenta.componentes)
+ 
+    } else if(cadaVenta.nombreVendedora === 'Sheryl'){
+    ventaSheryl.push(cadaVenta.componentes)
+    }
+ 
+  })
+ 
+ ventaAda.map(function(cadaVenta){
+    cadaVenta.map(function(componente){
+        cadaComponenteAda.push(componente)
+    })
+ })
+ 
+ ventaGrace.map(function(cadaVenta){
+    cadaVenta.map(function(componente){
+        cadaComponenteGrace.push(componente)
+    })
+ })
+ 
+ ventaHedy.map(function(cadaVenta){
+    cadaVenta.map(function(componente){
+        cadaComponenteHedy.push(componente)
+    })
+ })
+ 
+ ventaSheryl.map(function(cadaVenta){
+    cadaVenta.map(function(componente){
+        cadaComponenteSheryl.push(componente)
+    })
+ })
+ 
+ 
+ 
+ if (precioMaquina(cadaComponenteAda)>precioMaquina(cadaComponenteGrace)&& precioMaquina(cadaComponenteAda)> precioMaquina(cadaComponenteHedy)&& precioMaquina(cadaComponenteAda)> precioMaquina(cadaComponenteSheryl)){
+ 
+   return 'Ada';
+ 
+ }else if (precioMaquina(cadaComponenteGrace)>precioMaquina(cadaComponenteAda)&& precioMaquina(cadaComponenteGrace)> precioMaquina(cadaComponenteHedy)&& precioMaquina(cadaComponenteGrace)> precioMaquina(cadaComponenteSheryl)){
+ 
+   return 'Grace';
+ 
+ }else if (precioMaquina(cadaComponenteHedy)>precioMaquina(cadaComponenteAda)&& precioMaquina(cadaComponenteHedy)> precioMaquina(cadaComponenteGrace)&& precioMaquina(cadaComponenteHedy)> precioMaquina(cadaComponenteSheryl)){
+ 
+   return 'Hedy';
+ 
+ }else if (precioMaquina(cadaComponenteSheryl)>precioMaquina(cadaComponenteAda)&& precioMaquina(cadaComponenteSheryl)> precioMaquina(cadaComponenteGrace)&& precioMaquina(cadaComponenteSheryl)> precioMaquina(cadaComponenteHedy)){
+ 
+   return 'Sheryl';
+ 
+ }   
+ 
+ }
+ 
+
 function render(){
 
-  function vendedora(){
   
-   var ventaAda =[];
-   var cadaComponenteAda = [];
-   var ventaGrace=[];
-   var cadaComponenteGrace = [];
-   var ventaHedy=[];
-   var cadaComponenteHedy = [];
-   var ventaSheryl=[];
-   var cadaComponenteSheryl = [];
-  
-   local.ventas.map(function(cadaVenta){
-  
-       if(cadaVenta.nombreVendedora === 'Ada'){
-         ventaAda.push(cadaVenta.componentes)
-  
-       }else if(cadaVenta.nombreVendedora === 'Grace'){
-         ventaGrace.push(cadaVenta.componentes)
-  
-       }else if(cadaVenta.nombreVendedora === 'Hedy'){
-         ventaHedy.push(cadaVenta.componentes)
-  
-     } else if(cadaVenta.nombreVendedora === 'Sheryl'){
-     ventaSheryl.push(cadaVenta.componentes)
-     }
-  
-   })
-  
-  ventaAda.map(function(cadaVenta){
-     cadaVenta.map(function(componente){
-         cadaComponenteAda.push(componente)
-     })
-  })
-  
-  ventaGrace.map(function(cadaVenta){
-     cadaVenta.map(function(componente){
-         cadaComponenteGrace.push(componente)
-     })
-  })
-  
-  ventaHedy.map(function(cadaVenta){
-     cadaVenta.map(function(componente){
-         cadaComponenteHedy.push(componente)
-     })
-  })
-  
-  ventaSheryl.map(function(cadaVenta){
-     cadaVenta.map(function(componente){
-         cadaComponenteSheryl.push(componente)
-     })
-  })
-
-  var arrayVentas = [];
-  
-  if (cadaComponenteAda.length>0){
-  
-    arrayVentas.push(precioMaquina(cadaComponenteAda));
-  }
-  
-  if (cadaComponenteGrace.length>0){
-  
-    arrayVentas.push(precioMaquina(cadaComponenteGrace));
-  }
-  if (cadaComponenteHedy.length>0){
-  
-    arrayVentas.push(precioMaquina(cadaComponenteHedy));
-  }
-  if (cadaComponenteSheryl.length>0){
-  
-    arrayVentas.push(precioMaquina(cadaComponenteSheryl));
-
-  }
-
-  arrayVentas = arrayVentas.sort();
-  
-    if(arrayVentas[arrayVentas.length-1]== precioMaquina(cadaComponenteAda) ){
-  
-      return 'Ada'
-  
-    }else if(arrayVentas[arrayVentas.length-1]== precioMaquina(cadaComponenteGrace) ){
-  
-      return 'Grace'
-  
-    } else if(arrayVentas[arrayVentas.length-1]== precioMaquina(cadaComponenteHedy) ){
-  
-      return 'Hedy'
-  
-    } else if(arrayVentas[arrayVentas.length-1]== precioMaquina(cadaComponenteSheryl) ){
-  
-      return 'Sheryl'
-    }
-  
-  }
-  console.log(vendedora)
-//return 'Grace: '+ precioMaquina(cadaComponenteGrace) + ' ' + 'Hedy: ' +precioMaquina(cadaComponenteHedy)
-  //return 'function render: ' + 'Ventas por mes: ' + renderPorMes() + ' ventas por sucursal: ' + renderPorSucursal() + ' Producto estrella ' + componenteMasVendido () + ' Vendedora que más ingresos generó: ' + vendedora()
+  return 'function render: ' + 'Ventas por mes: ' + renderPorMes() + ' ventas por sucursal: ' + renderPorSucursal() + ' Producto estrella ' + componenteMasVendido () + ' Vendedora que más ingresos generó: ' + vendedora()
 }
 
-render()
-//console.log( render() );
+
+console.log( render() );
 // Reporte
 // Ventas por mes:
 //   Total de enero 2019: 1250
