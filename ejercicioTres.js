@@ -143,7 +143,7 @@ console.log(vendedoraDelMes(2, 2019));
 
 
 //----------------------------------------------------------------------------------------
-function vendedoraDelMes(){
+function vendedora(){
   
  var ventaAda =[];
  var cadaComponenteAda = [];
