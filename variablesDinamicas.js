@@ -106,92 +106,41 @@ console.log('\n')
 
 //vendedoraDelMes(mes, anio), se le pasa dos parámetros numéricos, (mes, anio) y devuelve el nombre de la vendedora que más vendió en plata en el mes. O sea no cantidad de ventas, sino importe total de las ventas. El importe de una venta es el que indica la función precioMaquina.
 
-function vendedoraDelMes(mes,anio){
-  
-  var ventasMes =[];
- 
- local.ventas.map(function(cadaVenta){
-     if(mes -1 === cadaVenta.fecha.getMonth() && anio === cadaVenta.fecha.getFullYear()){
-         ventasMes.push(cadaVenta);
-     }
- })
-
- var ventaAda =[];
- var cadaComponenteAda = [];
- var ventaGrace=[];
- var cadaComponenteGrace = [];
- var ventaHedy=[];
- var cadaComponenteHedy = [];
- var ventaSheryl=[];
- var cadaComponenteSheryl = [];
-
- ventasMes.map(function(cadaVenta){
-
-     if(cadaVenta.nombreVendedora === 'Ada'){
-       ventaAda.push(cadaVenta.componentes)
-
-     }else if(cadaVenta.nombreVendedora === 'Grace'){
-       ventaGrace.push(cadaVenta.componentes)
-
-     }else if(cadaVenta.nombreVendedora === 'Hedy'){
-       ventaHedy.push(cadaVenta.componentes)
-
-   } else if(cadaVenta.nombreVendedora === 'Sheryl'){
-   ventaSheryl.push(cadaVenta.componentes)
-   }
-
- })
-
-ventaAda.map(function(cadaVenta){
-   cadaVenta.map(function(componente){
-       cadaComponenteAda.push(componente)
-   })
-})
-
-ventaGrace.map(function(cadaVenta){
-   cadaVenta.map(function(componente){
-       cadaComponenteGrace.push(componente)
-   })
-})
-
-ventaHedy.map(function(cadaVenta){
-   cadaVenta.map(function(componente){
-       cadaComponenteHedy.push(componente)
-   })
-})
-
-ventaSheryl.map(function(cadaVenta){
-   cadaVenta.map(function(componente){
-       cadaComponenteSheryl.push(componente)
-   })
-})
-
-
-
-if (precioMaquina(cadaComponenteAda)>precioMaquina(cadaComponenteGrace)&& precioMaquina(cadaComponenteAda)> precioMaquina(cadaComponenteHedy)&& precioMaquina(cadaComponenteAda)> precioMaquina(cadaComponenteSheryl)){
-
-  return 'Ada';
-
-}else if (precioMaquina(cadaComponenteGrace)>precioMaquina(cadaComponenteAda)&& precioMaquina(cadaComponenteGrace)> precioMaquina(cadaComponenteHedy)&& precioMaquina(cadaComponenteGrace)> precioMaquina(cadaComponenteSheryl)){
-
-  return 'Grace';
-
-}else if (precioMaquina(cadaComponenteHedy)>precioMaquina(cadaComponenteAda)&& precioMaquina(cadaComponenteHedy)> precioMaquina(cadaComponenteGrace)&& precioMaquina(cadaComponenteHedy)> precioMaquina(cadaComponenteSheryl)){
-
-  return 'Hedy';
-
-}else if (precioMaquina(cadaComponenteSheryl)>precioMaquina(cadaComponenteAda)&& precioMaquina(cadaComponenteSheryl)> precioMaquina(cadaComponenteGrace)&& precioMaquina(cadaComponenteSheryl)> precioMaquina(cadaComponenteHedy)){
-
-  return 'Sheryl';
-
-}   
-
+var variables = {};
+var prefijo = 'texto';
+for (var i = 0; i < 3; i++) {
+  variables[prefijo + i] = i;
 }
 
-console.log(vendedoraDelMes(1, 2019)); // "Ada" (vendio por $670, una máquina de $320 y otra de $350)
-console.log(vendedoraDelMes(2, 2019)); 
+
+for(var key in variables) {
+  console.info(key);
+}
+console.log(variables)
+
 console.log('\n')
 
+function vendedoraDelMes(mes,anio){
+
+    var ventasVendedora = [];
+    var prefijo = 'vendedora';
+
+    for(i=0; i<local.ventas.length; i++){
+
+        if(mes -1 === local.ventas[i].fecha.getMonth() && anio === local.ventas[i].fecha.getFullYear()){
+            
+            ventasVendedora[prefijo +i] = {vendedora:local.ventas[i].nombreVendedora, componentes: local.ventas[i].componentes}
+
+            
+        }
+    }
+    console.log(ventasVendedora)
+}
+vendedoraDelMes(1,2019)
+//console.log(vendedoraDelMes(1, 2019)); // "Ada" (vendio por $670, una máquina de $320 y otra de $350)
+//console.log(vendedoraDelMes(2, 2019)); 
+console.log('\n')
+/*
 //---------------------------------------------------------------------------------------------------------------------------
 
 //ventasMes(mes, anio): Obtener las ventas de un mes.
@@ -781,7 +730,7 @@ noviembre.map(function(cadaVenta){
     } else {
       
       return 0
-      
+
     }
 
   })
@@ -960,3 +909,4 @@ console.log( render() );
 //   Total de Caballito: 1265
 // Producto estrella: Monitor GPRS 3000
 // Vendedora que más ingresos generó: Grace
+*/
