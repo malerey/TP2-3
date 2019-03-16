@@ -264,109 +264,63 @@ console.log( ventasVendedora("Ada") ); // 670
 
 function componenteMasVendido(){
 
-  var componentes = [
-    [],
-    [],
-    [],
-    [],
-    [],
-    [],
-    [],
-    [],
-    []
-  ]
+  var monitorGprs3000 = null;
+  var motherboardAsus1500 = null;
+  var monitorAsc543 = null;
+  var motherboardAsus1200 = null;
+  var motherboardMzi = null;
+  var hddToyiva = null;
+  var hddWezterDishital = null;
+  var ramQuinston = null;
+  var ramQuinstonFury = null;
+
   local.ventas.map(function(cadaVenta){
 
     cadaVenta.componentes.map(function(cadaComponente){
 
-      if(cadaComponente ==='Monitor GPRS 3000'){
+      if(cadaComponente === 'Monitor GPRS 3000'){
 
-        componentes[0].push('Monitor GPRS 3000')
+        monitorGprs3000 = cantidadVentasComponente('Monitor GPRS 3000')
 
-      }else if(cadaComponente ==='Motherboard ASUS 1500'){
+      }else if(cadaComponente === 'Motherboard ASUS 1500'){
 
-        componentes[1].push('Motherboard ASUS 1500')
+        motherboardAsus1500 = cantidadVentasComponente('Motherboard ASUS 1500')
 
-      }else if(cadaComponente ==='Monitor ASC 543'){
+      }else if(cadaComponente === 'Monitor ASC 543'){
 
-        componentes[2].push('Monitor ASC 543')
+        monitorAsc543 = cantidadVentasComponente('Monitor ASC 543')
 
-      }else if(cadaComponente ==='Motherboard ASUS 1200'){
+      }else if(cadaComponente === 'Motherboard ASUS 1200'){
 
-        componentes[3].push('Motherboard ASUS 1200')
+        motherboardAsus1200 = cantidadVentasComponente('Motherboard ASUS 1200')
 
-      }else if(cadaComponente ==='Motherboard MZI'){
+      }else if(cadaComponente === 'Motherboard MZI'){
 
-        componentes[4].push('Motherboard MZI')
+        motherboardMzi = cantidadVentasComponente('Motherboard MZI')
 
-      }else if(cadaComponente ==='HDD Toyiva'){
+      }else if(cadaComponente === 'HDD Toyiva'){
 
-        componentes[5].push('HDD Toyiva')
+        hddToyiva = cantidadVentasComponente('HDD Toyiva')
 
-      }else if(cadaComponente ==='"HDD Wezter Dishital'){
+      }else if(cadaComponente === 'HDD Wezter Dishital'){
 
-        componentes[6].push('"HDD Wezter Dishital')
+        hddWezterDishital = cantidadVentasComponente('HDD Wezter Dishital')
 
-      }else if(cadaComponente ==='RAM Quinston'){
+      }else if(cadaComponente === 'RAM Quinston'){
 
-        componentes[7].push('RAM Quinston')
+        ramQuinston = cantidadVentasComponente('RAM Quinston')
 
-      }else if(cadaComponente ==='RAM Quinston Fury'){
+      }else if(cadaComponente === 'RAM Quinston Fury'){
 
-        componentes[8].push('RAM Quinston Fury')
+        ramQuinstonFury = cantidadVentasComponente('RAM Quinston Fury')
 
       }
-
     })
+
   })
-  
-  var largos = [];
-
-  componentes.map(function(cadaComponente){
-    if(cadaComponente.length>0){
-
-    largos.push(cadaComponente.length)
-    }
-  })
-  largos = largos.sort()
-
-    if(largos[largos.length-1] === componentes[0].length){
-
-      return 'Monitor GPRS 3000'
-
-    }else if(largos[largos.length-1] === componentes[1].length){
-
-      return 'Motherboard ASUS 1500'
-
-    }else if(largos[largos.length-1] === componentes[2].length){
-
-      return 'Monitor ASC 543'
-
-    }else if(largos[largos.length-1] === componentes[3].length){
-
-      return 'Motherboard ASUS 1200'
-
-    }else if(largos[largos.length-1] === componentes[4].length){
-
-      return 'Motherboard MZI'
-
-    }else if(largos[largos.length-1] === componentes[5].length){
-
-      return 'HDD Toyiva'
-
-    }else if(largos[largos.length-1] === componentes[6].length){
-
-      return 'HDD Wezter Dishital'
-
-    }else if(largos[largos.length-1] === componentes[7].length){
-
-      return 'RAM Quinston'
-
-    }else if(largos[largos.length-1] === componentes[8].length){
-
-      return 'RAM Quinston Fury'
-    }
-    
+  if(monitorGprs3000 > motherboardAsus1500 && monitorGprs3000 > monitorAsc543 && monitorGprs3000 > motherboardAsus1200 && monitorGprs3000 > motherboardMzi && monitorGprs3000 > hddToyiva && monitorGprs3000 > hddToyiva && monitorGprs3000 > hddWezterDishital && monitorGprs3000 > ramQuinston && monitorGprs3000 > ramQuinstonFury){
+    return 'Monitor GPRS 3000'
+  }
 }
 
 console.log( componenteMasVendido() ); // Monitor GPRS 3000
