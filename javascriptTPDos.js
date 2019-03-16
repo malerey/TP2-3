@@ -66,7 +66,7 @@ console.log(precioMaquina(["Monitor GPRS 3000", "Motherboard ASUS 1500"]))
 console.log(precioMaquina(["Monitor ASC 543", "Motherboard MZI"]))
 console.log(precioMaquina(["Monitor ASC 543", "Motherboard ASUS 1200"]))
 console.log(precioMaquina(["Monitor GPRS 3000", "Motherboard ASUS 1200"]))
-
+console.log('\n')
 
 //---------------------------------------------------------------------------------------------------------------------------
 
@@ -100,7 +100,7 @@ console.log( cantidadVentasComponente("HDD Toyiva") );
 console.log( cantidadVentasComponente("HDD Wezter Dishital") );
 console.log( cantidadVentasComponente("RAM Quinston") );
 console.log( cantidadVentasComponente("RAM Quinston Fury") );
-
+console.log('\n')
 
 //---------------------------------------------------------------------------------------------------------------------------
 
@@ -190,7 +190,7 @@ if (precioMaquina(cadaComponenteAda)>precioMaquina(cadaComponenteGrace)&& precio
 
 console.log(vendedoraDelMes(1, 2019)); // "Ada" (vendio por $670, una máquina de $320 y otra de $350)
 console.log(vendedoraDelMes(2, 2019)); 
-
+console.log('\n')
 
 //---------------------------------------------------------------------------------------------------------------------------
 
@@ -219,7 +219,7 @@ function ventasMes(mes,anio){
 
 console.log( ventasMes(1, 2019) ); // 1250
 console.log( ventasMes(2, 2019) ); // 320
-
+console.log('\n')
 
 //---------------------------------------------------------------------------------------------------------------------------
 
@@ -256,7 +256,7 @@ return reducir(venta, componentesASumar)
 }
 console.log( ventasVendedora("Grace") ); // 900
 console.log( ventasVendedora("Ada") ); // 670
-
+console.log('\n')
 
 //---------------------------------------------------------------------------------------------------------------------------
 
@@ -264,15 +264,15 @@ console.log( ventasVendedora("Ada") ); // 670
 
 function componenteMasVendido(){
 
-  var monitorGprs3000 = null;
-  var motherboardAsus1500 = null;
-  var monitorAsc543 = null;
-  var motherboardAsus1200 = null;
-  var motherboardMzi = null;
-  var hddToyiva = null;
-  var hddWezterDishital = null;
-  var ramQuinston = null;
-  var ramQuinstonFury = null;
+  var monitorGprs3000 = 0;
+  var motherboardAsus1500 = 0;
+  var monitorAsc543 = 0;
+  var motherboardAsus1200 = 0;
+  var motherboardMzi = 0;
+  var hddToyiva = 0;
+  var hddWezterDishital = 0;
+  var ramQuinston = 0;
+  var ramQuinstonFury = 0;
 
   local.ventas.map(function(cadaVenta){
 
@@ -318,13 +318,48 @@ function componenteMasVendido(){
     })
 
   })
-  if(monitorGprs3000 > motherboardAsus1500 && monitorGprs3000 > monitorAsc543 && monitorGprs3000 > motherboardAsus1200 && monitorGprs3000 > motherboardMzi && monitorGprs3000 > hddToyiva && monitorGprs3000 > hddToyiva && monitorGprs3000 > hddWezterDishital && monitorGprs3000 > ramQuinston && monitorGprs3000 > ramQuinstonFury){
+
+  if(monitorGprs3000 > motherboardAsus1500 && monitorGprs3000 > monitorAsc543 && monitorGprs3000 > motherboardAsus1200 && monitorGprs3000 > motherboardMzi && monitorGprs3000 > hddToyiva && monitorGprs3000 > hddWezterDishital && monitorGprs3000 > ramQuinston && monitorGprs3000 > ramQuinstonFury){
+    
     return 'Monitor GPRS 3000'
-  }
+
+  }else if(motherboardAsus1500 > monitorGprs3000 && motherboardAsus1500 > monitorAsc543 && motherboardAsus1500 > motherboardAsus1200 && motherboardAsus1500 > motherboardMzi && motherboardAsus1500 > hddToyiva && motherboardAsus1500 > hddWezterDishital && motherboardAsus1500 > ramQuinston && motherboardAsus1500 > ramQuinstonFury){
+    
+    return 'Motherboard ASUS 1500'
+
+  }else if(monitorAsc543 > monitorGprs3000 && monitorAsc543 > motherboardAsus1500 && monitorAsc543 > motherboardAsus1200 && monitorAsc543 > motherboardMzi && monitorAsc543 > hddToyiva && monitorAsc543 > hddWezterDishital && monitorAsc543 > ramQuinston && monitorAsc543 > ramQuinstonFury){
+    
+    return 'monitorAsc 543'
+
+  }else if(motherboardAsus1200 > monitorGprs3000 && motherboardAsus1200 > motherboardAsus1500 && motherboardAsus1200 > monitorAsc543 && motherboardAsus1200 > motherboardMzi && motherboardAsus1200 > hddToyiva && motherboardAsus1200 > hddWezterDishital && motherboardAsus1200 > ramQuinston && motherboardAsus1200 > ramQuinstonFury){
+    
+    return 'Motherboard ASUS 1200'
+
+  }else if(motherboardMzi > monitorGprs3000 && motherboardMzi > motherboardAsus1500 && motherboardMzi > monitorAsc543 && motherboardAsus1200 < motherboardMzi && motherboardMzi > hddToyiva && motherboardMzi > hddWezterDishital && motherboardMzi > ramQuinston && motherboardMzi > ramQuinstonFury){
+    
+    return 'Motherboard MZI'
+
+  }else if(hddToyiva > monitorGprs3000 && hddToyiva > motherboardAsus1500 && hddToyiva > monitorAsc543 && hddToyiva > motherboardAsus1200 && hddToyiva > motherboardMzi && hddToyiva > hddWezterDishital && hddToyiva > ramQuinston && hddToyiva > ramQuinstonFury){
+    
+    return 'HDD Toyiva'
+
+  }else if(hddWezterDishital > monitorGprs3000 && hddWezterDishital > motherboardAsus1500 && hddWezterDishital > monitorAsc543 && hddWezterDishital > motherboardAsus1200 && hddWezterDishital > motherboardMzi && hddToyiva < hddWezterDishital && hddWezterDishital > ramQuinston && hddWezterDishital > ramQuinstonFury){
+    
+    return 'HDD Wezter Dishital'
+
+  }else if(ramQuinston > monitorGprs3000 && ramQuinston > motherboardAsus1500 && ramQuinston > monitorAsc543 && ramQuinston > motherboardAsus1200 && ramQuinston > motherboardMzi && ramQuinston > hddToyiva && ramQuinston > hddWezterDishital && ramQuinston > ramQuinstonFury){
+    
+    return 'RAM Quinston'
+
+  }else if(ramQuinstonFury > monitorGprs3000 && ramQuinstonFury > motherboardAsus1500 && ramQuinstonFury > monitorAsc543 && ramQuinstonFury > motherboardAsus1200 && ramQuinstonFury > motherboardMzi && ramQuinstonFury > hddToyiva && ramQuinstonFury > hddWezterDishital && ramQuinstonFury > ramQuinston){
+    
+    return 'RAM Quinston Fury'
+
+  } 
 }
 
 console.log( componenteMasVendido() ); // Monitor GPRS 3000
-
+console.log('\n')
 
 //---------------------------------------------------------------------------------------------------------------------------
 
@@ -349,6 +384,7 @@ var ventas = false;
 console.log( huboVentas(3, 2019) ); // false
 console.log( huboVentas(1, 2019) ); // true
 console.log( huboVentas(2, 2019) ); // true
+console.log('\n')
 
 
 //---------------------------------------------------------------------------------------------------------------------------
@@ -433,6 +469,7 @@ function ventasSucursal(sucursal){
 
 console.log( ventasSucursal("Centro") ); // 4195
 console.log( ventasSucursal("Caballito") ); // 
+console.log('\n')
 
 //Las funciones ventasSucursal y ventasVendedora tienen mucho código en común, ya que es la misma funcionalidad pero trabajando con una 
 //propiedad distinta. Entonces, ¿cómo harías para que ambas funciones reutilicen código y evitemos repetir?
@@ -480,7 +517,7 @@ if(centro > caballito){
 }
 console.log( sucursalDelMes(1, 2019) ); // "Centro"
 console.log( sucursalDelMes(2, 2019) ); 
-
+console.log('\n')
 
 //---------------------------------------------------------------------------------------------------------------------------
 
@@ -766,16 +803,16 @@ diciembre.map(function(cadaVenta){
 
 })
 
-return 'Total de enero 2019: ' + precioMaquina(eneroVentas) + '// Total de febrero 2019: ' + precioMaquina(febreroVentas) + '// cortó acá porque es muy largo'
+return 'Total por mes:' + '\n Total de enero 2019: ' + precioMaquina(eneroVentas) + '\n Total de febrero 2019: ' + precioMaquina(febreroVentas) 
 }
 
 console.log( renderPorMes() );
+console.log('\n')
 
 // Ventas por mes:
 //   Total de enero 2019: 1250,
 //   Total de febrero 2019: 4210
 
-// no sé cómo cambiar de linea para que me quede así de prolijo
 
 
 //---------------------------------------------------------------------------------------------------------------------------
@@ -818,7 +855,7 @@ caballito.map(function(cadaVenta){
   })
 })
 
-return 'Ventas por sucursal: Total de Centro: ' + precioMaquina(centroComponentes) + ' Total de Caballito: ' + precioMaquina(caballitoComponentes)
+return 'Ventas por sucursal:' + '\nTotal de Centro: ' + precioMaquina(centroComponentes) + '\n Total de Caballito: ' + precioMaquina(caballitoComponentes)
 }
 
 console.log( renderPorSucursal() );
@@ -905,11 +942,10 @@ function vendedora(){
  
  }
  
-
 function render(){
 
   
-  return 'function render: ' + 'Ventas por mes: ' + renderPorMes() + ' ventas por sucursal: ' + renderPorSucursal() + ' Producto estrella ' + componenteMasVendido () + ' Vendedora que más ingresos generó: ' + vendedora()
+return 'Reporte ' + '\nVentas por mes: \n' + renderPorMes() + '\n\n ventas por sucursal: ' + renderPorSucursal() + '\n\n Producto estrella ' + componenteMasVendido () + '\n\n Vendedora que más ingresos generó: ' + vendedora()
 }
 
 
