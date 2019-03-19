@@ -106,33 +106,41 @@ console.log('\n')
 
 //vendedoraDelMes(mes, anio), se le pasa dos parámetros numéricos, (mes, anio) y devuelve el nombre de la vendedora que más vendió en plata en el mes. O sea no cantidad de ventas, sino importe total de las ventas. El importe de una venta es el que indica la función precioMaquina.
 
-var variables = {};
-var prefijo = 'texto';
-for (var i = 0; i < 3; i++) {
-  variables[prefijo + i] = i;
-}
-
-
-for(var key in variables) {
-  console.info(key);
-}
-console.log(variables)
-
-console.log('\n')
-
 function vendedoraDelMes(mes,anio){
 
     var ventasVendedora = [];
-    var prefijo = 'vendedora';
+
+
+
+    for(i=0; i<local.vendedoras.length; i++){
+        ventasVendedora[i]={nombre: local.vendedoras[i], componentes: [], componentesASumar: [] }
+    }
 
     for(i=0; i<local.ventas.length; i++){
 
         if(mes -1 === local.ventas[i].fecha.getMonth() && anio === local.ventas[i].fecha.getFullYear()){
             
-            ventasVendedora[prefijo +i] = {vendedora:local.ventas[i].nombreVendedora, componentes: local.ventas[i].componentes}
+            for(j=0; j<ventasVendedora.length; j++){
+
+                if(local.ventas[i].nombreVendedora === ventasVendedora[j].nombre){
+              
+                    ventasVendedora[j].componentes.push(local.ventas[i].componentes)
+                }
+            }
 
             
         }
+    }
+
+    for(i=0; i<ventasVendedora; i++){
+
+        for(j=0; j<ventasVendedora[i].componentes.length; j++){
+
+            ventasVendedora[i].componentesASumar.push(ventasVendedora[i].componentes[j])
+            console.log(ventasVendedora[i].componentes[j])
+
+        }
+        console.log(ventasVendedora[i].componentesASumar)
     }
     console.log(ventasVendedora)
 }

@@ -1,5 +1,3 @@
-//console.log('Hola Mundo')
-
 //Local de ventas de PCs
 //Una empresa de venta de computadoras está desarrollando un sistema para llevar registro de ventas. Para ello cuenta con la siguiente información:
 
