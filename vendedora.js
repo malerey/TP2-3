@@ -57,7 +57,13 @@ function precioMaquina (arrayComponentes){
 } else{
   return 0
 }
-  
+var maximo = 0
+  for(i=0; i<arraYvendedoras.length; i++){
+      
+    if(maximo <arrayVendedoras[i].ventas){
+        maximo= arrayVendedoras[i].ventas
+    }
+  }
 }
 console.log(precioMaquina(["Monitor GPRS 3000", "Motherboard ASUS 1500"]))
 console.log(precioMaquina(["Monitor GPRS 3000", "Motherboard ASUS 1500"]))
@@ -106,63 +112,32 @@ console.log('\n')
 
 function vendedoraDelMes(mes,anio){
 
-  var ventasVendedora = [];
+    for(j=0; j<local.vendedoras.length;j++){
+
+        var objetoNuevo = {nombre: local.vendedoras[j], ventas: 0}
+
+        for(i=0; i<local.ventas.length; i++){
+
+            if(local.ventas[i].fecha.getMonth() === mes - 1 && local.ventas[i].fecha.getFullYear() === anio){
+
+                if(local.vendedoras[j] === local.ventas[i].nombreVendedora){
+
+                    objetoNuevo.ventas = objetoNuevo.ventas + precioMaquina(local.ventas[i].componentes)
+
+                    console.log(objetoNuevo + 'lalala')
+                }
 
 
-
-  for(i=0; i<local.vendedoras.length; i++){
-      ventasVendedora[i]={nombre: local.vendedoras[i], componentes: [] }
-  }
-
-  for(i=0; i<local.ventas.length; i++){
-
-      if(mes -1 === local.ventas[i].fecha.getMonth() && anio === local.ventas[i].fecha.getFullYear()){
-          
-          for(j=0; j<ventasVendedora.length; j++){
-
-              if(local.ventas[i].nombreVendedora === ventasVendedora[j].nombre){
-            
-                  ventasVendedora[j].componentes.push(precioMaquina(local.ventas[i].componentes))
-              }
-          }
-
-          
-      }
-  }
-
-  for(i=0; i<ventasVendedora.length; i++){
-
-    if(ventasVendedora[i].componentes.length){
-
-          ventasVendedora[i].componentes = ventasVendedora[i].componentes.reduce(function(total,suma){
-            return total + suma
-
-      })
-      
+             }   
+        
+        }   
     }
-  
-  }
-
-  var valorMaximo = 0;
-  var vendedora ='';
-
-  for(i=0; i<ventasVendedora.length; i++){
-
-    if(valorMaximo< ventasVendedora[i].componentes){
-
-      valorMaximo = ventasVendedora[i].componentes;
-
-      vendedora = ventasVendedora[i].nombre;
-
-    }
-  }
-return vendedora
-
+    
 }
 
-console.log(vendedoraDelMes(1, 2019)); // "Ada" (vendio por $670, una máquina de $320 y otra de $350)
-console.log(vendedoraDelMes(2, 2019)); 
+console.log(vendedoraDelMes(1,2019) + 'lalala')
 console.log('\n')
+
 //---------------------------------------------------------------------------------------------------------------------------
 
 //ventasMes(mes, anio): Obtener las ventas de un mes.

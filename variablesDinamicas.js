@@ -113,7 +113,7 @@ function vendedoraDelMes(mes,anio){
 
 
     for(i=0; i<local.vendedoras.length; i++){
-        ventasVendedora[i]={nombre: local.vendedoras[i], componentes: [], componentesASumar: [] }
+        ventasVendedora[i]={nombre: local.vendedoras[i], componentes: [] }
     }
 
     for(i=0; i<local.ventas.length; i++){
@@ -124,7 +124,7 @@ function vendedoraDelMes(mes,anio){
 
                 if(local.ventas[i].nombreVendedora === ventasVendedora[j].nombre){
               
-                    ventasVendedora[j].componentes.push(local.ventas[i].componentes)
+                    ventasVendedora[j].componentes.push(precioMaquina(local.ventas[i].componentes))
                 }
             }
 
@@ -132,21 +132,38 @@ function vendedoraDelMes(mes,anio){
         }
     }
 
-    for(i=0; i<ventasVendedora; i++){
+    for(i=0; i<ventasVendedora.length; i++){
 
-        for(j=0; j<ventasVendedora[i].componentes.length; j++){
+      if(ventasVendedora[i].componentes.length){
 
-            ventasVendedora[i].componentesASumar.push(ventasVendedora[i].componentes[j])
-            console.log(ventasVendedora[i].componentes[j])
+            ventasVendedora[i].componentes = ventasVendedora[i].componentes.reduce(function(total,suma){
+              return total + suma
 
-        }
-        console.log(ventasVendedora[i].componentesASumar)
+        })
+        
+      }
+    
     }
-    console.log(ventasVendedora)
+
+    var valorMaximo = 0;
+    var vendedora ='';
+
+    for(i=0; i<ventasVendedora.length; i++){
+
+      if(valorMaximo< ventasVendedora[i].componentes){
+
+        valorMaximo = ventasVendedora[i].componentes;
+
+        vendedora = ventasVendedora[i].nombre;
+
+      }
+    }
+  return vendedora
+
 }
-vendedoraDelMes(1,2019)
-//console.log(vendedoraDelMes(1, 2019)); // "Ada" (vendio por $670, una máquina de $320 y otra de $350)
-//console.log(vendedoraDelMes(2, 2019)); 
+
+console.log(vendedoraDelMes(1, 2019)); // "Ada" (vendio por $670, una máquina de $320 y otra de $350)
+console.log(vendedoraDelMes(2, 2019)); 
 console.log('\n')
 /*
 //---------------------------------------------------------------------------------------------------------------------------
