@@ -131,7 +131,7 @@ function vendedoraDelMes(mes,anio){
             
         }
     }
-
+console.log(ventasVendedora)
     for(i=0; i<ventasVendedora.length; i++){
 
       if(ventasVendedora[i].componentes.length){

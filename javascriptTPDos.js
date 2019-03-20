@@ -55,6 +55,7 @@ function precioMaquina (arrayComponentes){
     return total + suma; // Este este return es solo de esta función
   })
 } else{
+  
   return 0
 }
   
@@ -233,101 +234,43 @@ console.log('\n')
 
 function componenteMasVendido(){
 
-  var monitorGprs3000 = 0;
-  var motherboardAsus1500 = 0;
-  var monitorAsc543 = 0;
-  var motherboardAsus1200 = 0;
-  var motherboardMzi = 0;
-  var hddToyiva = 0;
-  var hddWezterDishital = 0;
-  var ramQuinston = 0;
-  var ramQuinstonFury = 0;
+  var compo = [];
 
-  local.ventas.map(function(cadaVenta){
+  for(var i =0; i<local.precios.length; i++){
 
-    cadaVenta.componentes.map(function(cadaComponente){
+      compo[i] = {componente: local.precios[i].componente, contador:0}
 
-      if(cadaComponente === 'Monitor GPRS 3000'){
+  }
 
-        monitorGprs3000 = cantidadVentasComponente('Monitor GPRS 3000')
+  for(var i = 0; i< local.ventas.length; i++){
 
-      }else if(cadaComponente === 'Motherboard ASUS 1500'){
+      for(var j=0; j<compo.length; j++){
 
-        motherboardAsus1500 = cantidadVentasComponente('Motherboard ASUS 1500')
+          if(local.ventas[i].componentes[j] === compo[j].componente){
 
-      }else if(cadaComponente === 'Monitor ASC 543'){
-
-        monitorAsc543 = cantidadVentasComponente('Monitor ASC 543')
-
-      }else if(cadaComponente === 'Motherboard ASUS 1200'){
-
-        motherboardAsus1200 = cantidadVentasComponente('Motherboard ASUS 1200')
-
-      }else if(cadaComponente === 'Motherboard MZI'){
-
-        motherboardMzi = cantidadVentasComponente('Motherboard MZI')
-
-      }else if(cadaComponente === 'HDD Toyiva'){
-
-        hddToyiva = cantidadVentasComponente('HDD Toyiva')
-
-      }else if(cadaComponente === 'HDD Wezter Dishital'){
-
-        hddWezterDishital = cantidadVentasComponente('HDD Wezter Dishital')
-
-      }else if(cadaComponente === 'RAM Quinston'){
-
-        ramQuinston = cantidadVentasComponente('RAM Quinston')
-
-      }else if(cadaComponente === 'RAM Quinston Fury'){
-
-        ramQuinstonFury = cantidadVentasComponente('RAM Quinston Fury')
-
+              compo[j].contador ++
+          }
       }
-    })
+  }
 
-  })
+  var valorMaximo = 0;
+  var componenteMasVendido = '';
 
-  if(monitorGprs3000 > motherboardAsus1500 && monitorGprs3000 > monitorAsc543 && monitorGprs3000 > motherboardAsus1200 && monitorGprs3000 > motherboardMzi && monitorGprs3000 > hddToyiva && monitorGprs3000 > hddWezterDishital && monitorGprs3000 > ramQuinston && monitorGprs3000 > ramQuinstonFury){
-    
-    return 'Monitor GPRS 3000'
+  for(var i=0; i< compo.length; i++){
 
-  }else if(motherboardAsus1500 > monitorGprs3000 && motherboardAsus1500 > monitorAsc543 && motherboardAsus1500 > motherboardAsus1200 && motherboardAsus1500 > motherboardMzi && motherboardAsus1500 > hddToyiva && motherboardAsus1500 > hddWezterDishital && motherboardAsus1500 > ramQuinston && motherboardAsus1500 > ramQuinstonFury){
-    
-    return 'Motherboard ASUS 1500'
 
-  }else if(monitorAsc543 > monitorGprs3000 && monitorAsc543 > motherboardAsus1500 && monitorAsc543 > motherboardAsus1200 && monitorAsc543 > motherboardMzi && monitorAsc543 > hddToyiva && monitorAsc543 > hddWezterDishital && monitorAsc543 > ramQuinston && monitorAsc543 > ramQuinstonFury){
-    
-    return 'monitorAsc 543'
 
-  }else if(motherboardAsus1200 > monitorGprs3000 && motherboardAsus1200 > motherboardAsus1500 && motherboardAsus1200 > monitorAsc543 && motherboardAsus1200 > motherboardMzi && motherboardAsus1200 > hddToyiva && motherboardAsus1200 > hddWezterDishital && motherboardAsus1200 > ramQuinston && motherboardAsus1200 > ramQuinstonFury){
-    
-    return 'Motherboard ASUS 1200'
+      if(valorMaximo < compo[i].contador){
+          
+          valorMaximo = compo[i].contador;
+          componenteMasVendido = compo[i].componente
+      }
+  }
 
-  }else if(motherboardMzi > monitorGprs3000 && motherboardMzi > motherboardAsus1500 && motherboardMzi > monitorAsc543 && motherboardAsus1200 < motherboardMzi && motherboardMzi > hddToyiva && motherboardMzi > hddWezterDishital && motherboardMzi > ramQuinston && motherboardMzi > ramQuinstonFury){
-    
-    return 'Motherboard MZI'
-
-  }else if(hddToyiva > monitorGprs3000 && hddToyiva > motherboardAsus1500 && hddToyiva > monitorAsc543 && hddToyiva > motherboardAsus1200 && hddToyiva > motherboardMzi && hddToyiva > hddWezterDishital && hddToyiva > ramQuinston && hddToyiva > ramQuinstonFury){
-    
-    return 'HDD Toyiva'
-
-  }else if(hddWezterDishital > monitorGprs3000 && hddWezterDishital > motherboardAsus1500 && hddWezterDishital > monitorAsc543 && hddWezterDishital > motherboardAsus1200 && hddWezterDishital > motherboardMzi && hddToyiva < hddWezterDishital && hddWezterDishital > ramQuinston && hddWezterDishital > ramQuinstonFury){
-    
-    return 'HDD Wezter Dishital'
-
-  }else if(ramQuinston > monitorGprs3000 && ramQuinston > motherboardAsus1500 && ramQuinston > monitorAsc543 && ramQuinston > motherboardAsus1200 && ramQuinston > motherboardMzi && ramQuinston > hddToyiva && ramQuinston > hddWezterDishital && ramQuinston > ramQuinstonFury){
-    
-    return 'RAM Quinston'
-
-  }else if(ramQuinstonFury > monitorGprs3000 && ramQuinstonFury > motherboardAsus1500 && ramQuinstonFury > monitorAsc543 && ramQuinstonFury > motherboardAsus1200 && ramQuinstonFury > motherboardMzi && ramQuinstonFury > hddToyiva && ramQuinstonFury > hddWezterDishital && ramQuinstonFury > ramQuinston){
-    
-    return 'RAM Quinston Fury'
-
-  } 
+  return componenteMasVendido
 }
 
-console.log( componenteMasVendido() ); // Monitor GPRS 3000
+console.log( componenteMasVendido()); // Monitor GPRS 3000
 console.log('\n')
 
 //---------------------------------------------------------------------------------------------------------------------------
