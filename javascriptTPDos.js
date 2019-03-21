@@ -111,11 +111,11 @@ function vendedoraDelMes(mes,anio){
 
 
 
-  for(i=0; i<local.vendedoras.length; i++){
+  for(var i=0; i<local.vendedoras.length; i++){
       ventasVendedora[i]={nombre: local.vendedoras[i], componentes: [] }
   }
 
-  for(i=0; i<local.ventas.length; i++){
+  for(var i=0; i<local.ventas.length; i++){
 
       if(mes -1 === local.ventas[i].fecha.getMonth() && anio === local.ventas[i].fecha.getFullYear()){
           
@@ -131,7 +131,7 @@ function vendedoraDelMes(mes,anio){
       }
   }
 
-  for(i=0; i<ventasVendedora.length; i++){
+  for(var i=0; i<ventasVendedora.length; i++){
 
     if(ventasVendedora[i].componentes.length){
 
@@ -147,7 +147,7 @@ function vendedoraDelMes(mes,anio){
   var valorMaximo = 0;
   var vendedora ='';
 
-  for(i=0; i<ventasVendedora.length; i++){
+  for(var i=0; i<ventasVendedora.length; i++){
 
     if(valorMaximo< ventasVendedora[i].componentes){
 
@@ -391,42 +391,58 @@ console.log('\n')
 
 //---------------------------------------------------------------------------------------------------------------------------
 
-//Crear la función sucursalDelMes(mes, anio), que se le pasa dos parámetros numéricos, (mes, anio) y devuelve el nombre de la sucursal que más vendió en plata en el mes. No cantidad de ventas, sino importe total de las ventas. El importe de una venta es el que indica la función precioMaquina.
+//Crear la función sucursalDelMes(mes, anio), que se le pasa dos parámetros numéricos, (mes, anio) y devuelve el nombre de la sucursal que más vendió en plata en el mes. 
+//No cantidad de ventas, sino importe total de las ventas. El importe de una venta es el que indica la función precioMaquina.
 
 function sucursalDelMes(mes, anio){
 
-  var centro = [];
-  var componentesASumarCentro = [];
-  var caballito = [];
-  var componentesASumarCaballito = [];
-  
-  local.ventas.map(function(cadaVenta){
+  var sucursales = [];
 
-    if(mes -1 === cadaVenta.fecha.getMonth() && anio === cadaVenta.fecha.getFullYear()){
+  for(var i=0; i<local.sucursales.length; i++){
 
-      if(cadaVenta.sucursal === 'Centro'){
+    sucursales[i]={nombre: local.sucursales[i], componentes: [] }
+}
 
-        centro.push(cadaVenta.componentes)
+  for(var i=0; i<local.ventas.length; i++){
 
-      }else if(cadaVenta.sucursal === 'Caballito'){
+    if(mes -1 === local.ventas[i].fecha.getMonth() && anio === local.ventas[i].fecha.getFullYear()){
+      
+      for(var j=0; j<sucursales.length; j++){
 
-        caballito.push(cadaVenta.componentes)
+        if(local.ventas[i].sucursal === sucursales[j].nombre){
+
+          for(var k =0; k<local.ventas[i].componentes.length; k++){
+
+            sucursales[j].componentes.push(local.ventas[i].componentes[k])
+          }
+        }
       }
     }
-  })
-  centro = reducir(centro, componentesASumarCentro);
-  caballito = reducir(caballito, componentesASumarCaballito);
-  
-
-if(centro > caballito){
-
-    return 'Centro';
-
-}else if(caballito> centro){
-
-    return 'Caballito'
+   
   }
+sucursales.map(function(cadaSucursal){
+
+  cadaSucursal.componentes = precioMaquina(cadaSucursal.componentes);
+})
+
+var valorMaximo = 0;
+
+  var sucursalMasVentas = '';
+
+  for(var i=0; i < sucursales.length; i++){
+
+      if(valorMaximo < sucursales[i].componentes){
+          
+          valorMaximo = sucursales[i].componentes;
+
+          sucursalMasVentas = sucursales[i].nombre;
+      }
+  }
+
+  return sucursalMasVentas
 }
+
+
 console.log( sucursalDelMes(1, 2019) ); // "Centro"
 console.log( sucursalDelMes(2, 2019) ); 
 console.log('\n')
