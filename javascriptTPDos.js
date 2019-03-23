@@ -496,42 +496,38 @@ console.log('\n')
 
 function renderPorSucursal(){
 
-  var centro =[];
-  var centroComponentes = [];
-  var caballito = [];
-  var caballitoComponentes = [];
+  var sucursales = [];
 
-  local.ventas.map(function(cadaVenta){
+  local.sucursales.map(function(cadaSucursal){
 
-    if(cadaVenta.sucursal === 'Centro'){
+    sucursales.push({sucursal: cadaSucursal, componentes: []})
+  })
+  
+  for(var i=0; i<sucursales.length; i++){
 
-      centro.push(cadaVenta.componentes)
+    for(var j=0; j<local.ventas.length; j++){
 
-    } else if(cadaVenta.sucursal === 'Caballito'){
+      if(sucursales[i].sucursal === local.ventas[j].sucursal){
 
-      caballito.push(cadaVenta.componentes)
+        for(var k=0; k<local.ventas[j].componentes.length; k++){
+
+          sucursales[i].componentes.push(local.ventas[j].componentes[k])
+        }
+        
+      }
     }
+  }
+  function meses (){
 
-  })
+  for(var i=0; i< sucursales.length; i++){
 
-centro.map(function(cadaVenta){
-
-  cadaVenta.map(function(cadaComponente){
-
-    centroComponentes.push(cadaComponente)
-  })
-})
-
-caballito.map(function(cadaVenta){
-
-  cadaVenta.map(function(cadaComponente){
-
-    caballitoComponentes.push(cadaComponente)
-  })
-})
-
-return 'Ventas por sucursal:' + '\nTotal de Centro: ' + precioMaquina(centroComponentes) + '\n Total de Caballito: ' + precioMaquina(caballitoComponentes)
+    return  'Total de ' + sucursales[i].sucursal + ': ' +  precioMaquina(sucursales[i].componentes)
+    //me pasa lo mismo: no puedo retornar sin cortar el for
+  }
 }
+  return 'Ventas por sucursal: \n' + meses()
+}
+  
 
 console.log( renderPorSucursal() );
 // Ventas por sucursal:
@@ -544,79 +540,55 @@ console.log( renderPorSucursal() );
 //render(): Tiene que mostrar la unión de los dos reportes anteriores, cual fue el producto más vendido y la vendedora que más ingresos generó
 
 function vendedora(){
-  
-  var ventaAda =[];
-  var cadaComponenteAda = [];
-  var ventaGrace=[];
-  var cadaComponenteGrace = [];
-  var ventaHedy=[];
-  var cadaComponenteHedy = [];
-  var ventaSheryl=[];
-  var cadaComponenteSheryl = [];
- 
-  local.ventas.map(function(cadaVenta){
- 
-      if(cadaVenta.nombreVendedora === 'Ada'){
-        ventaAda.push(cadaVenta.componentes)
- 
-      }else if(cadaVenta.nombreVendedora === 'Grace'){
-        ventaGrace.push(cadaVenta.componentes)
- 
-      }else if(cadaVenta.nombreVendedora === 'Hedy'){
-        ventaHedy.push(cadaVenta.componentes)
- 
-    } else if(cadaVenta.nombreVendedora === 'Sheryl'){
-    ventaSheryl.push(cadaVenta.componentes)
+
+  var ventasVendedora = [];
+
+
+
+  for(var i=0; i<local.vendedoras.length; i++){
+      ventasVendedora[i]={nombre: local.vendedoras[i], componentes: [] }
+  }
+
+  for(var i=0; i<local.ventas.length; i++){
+          
+          for(j=0; j<ventasVendedora.length; j++){
+
+              if(local.ventas[i].nombreVendedora === ventasVendedora[j].nombre){
+            
+                  ventasVendedora[j].componentes.push(precioMaquina(local.ventas[i].componentes))
+              }
+          } 
+      }
+
+  for(var i=0; i<ventasVendedora.length; i++){
+
+    if(ventasVendedora[i].componentes.length){
+
+          ventasVendedora[i].componentes = ventasVendedora[i].componentes.reduce(function(total,suma){
+            return total + suma
+
+      })
+      
     }
- 
-  })
- 
- ventaAda.map(function(cadaVenta){
-    cadaVenta.map(function(componente){
-        cadaComponenteAda.push(componente)
-    })
- })
- 
- ventaGrace.map(function(cadaVenta){
-    cadaVenta.map(function(componente){
-        cadaComponenteGrace.push(componente)
-    })
- })
- 
- ventaHedy.map(function(cadaVenta){
-    cadaVenta.map(function(componente){
-        cadaComponenteHedy.push(componente)
-    })
- })
- 
- ventaSheryl.map(function(cadaVenta){
-    cadaVenta.map(function(componente){
-        cadaComponenteSheryl.push(componente)
-    })
- })
- 
- 
- 
- if (precioMaquina(cadaComponenteAda)>precioMaquina(cadaComponenteGrace)&& precioMaquina(cadaComponenteAda)> precioMaquina(cadaComponenteHedy)&& precioMaquina(cadaComponenteAda)> precioMaquina(cadaComponenteSheryl)){
- 
-   return 'Ada';
- 
- }else if (precioMaquina(cadaComponenteGrace)>precioMaquina(cadaComponenteAda)&& precioMaquina(cadaComponenteGrace)> precioMaquina(cadaComponenteHedy)&& precioMaquina(cadaComponenteGrace)> precioMaquina(cadaComponenteSheryl)){
- 
-   return 'Grace';
- 
- }else if (precioMaquina(cadaComponenteHedy)>precioMaquina(cadaComponenteAda)&& precioMaquina(cadaComponenteHedy)> precioMaquina(cadaComponenteGrace)&& precioMaquina(cadaComponenteHedy)> precioMaquina(cadaComponenteSheryl)){
- 
-   return 'Hedy';
- 
- }else if (precioMaquina(cadaComponenteSheryl)>precioMaquina(cadaComponenteAda)&& precioMaquina(cadaComponenteSheryl)> precioMaquina(cadaComponenteGrace)&& precioMaquina(cadaComponenteSheryl)> precioMaquina(cadaComponenteHedy)){
- 
-   return 'Sheryl';
- 
- }   
- 
- }
- 
+  
+  }
+
+  var valorMaximo = 0;
+  var vendedora ='';
+
+  for(var i=0; i<ventasVendedora.length; i++){
+
+    if(valorMaximo< ventasVendedora[i].componentes){
+
+      valorMaximo = ventasVendedora[i].componentes;
+
+      vendedora = ventasVendedora[i].nombre;
+
+    }
+  }
+return vendedora
+
+} 
 function render(){
 
   
