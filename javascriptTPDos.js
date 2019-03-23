@@ -109,8 +109,6 @@ function vendedoraDelMes(mes,anio){
 
   var ventasVendedora = [];
 
-
-
   for(var i=0; i<local.vendedoras.length; i++){
       ventasVendedora[i]={nombre: local.vendedoras[i], componentes: [] }
   }
@@ -126,7 +124,6 @@ function vendedoraDelMes(mes,anio){
                   ventasVendedora[j].componentes.push(precioMaquina(local.ventas[i].componentes))
               }
           }
-
           
       }
   }
@@ -257,8 +254,6 @@ function componenteMasVendido(){
   var componenteMasVendido = '';
 
   for(var i=0; i< compo.length; i++){
-
-
 
       if(valorMaximo < compo[i].contador){
           
@@ -427,7 +422,7 @@ sucursales.map(function(cadaSucursal){
 
 var valorMaximo = 0;
 
-  var sucursalMasVentas = '';
+var sucursalMasVentas = '';
 
   for(var i=0; i < sucursales.length; i++){
 
@@ -528,7 +523,6 @@ function renderPorSucursal(){
   return 'Ventas por sucursal: \n' + meses()
 }
   
-
 console.log( renderPorSucursal() );
 // Ventas por sucursal:
 //   Total de Centro: 4195
@@ -542,8 +536,6 @@ console.log( renderPorSucursal() );
 function vendedora(){
 
   var ventasVendedora = [];
-
-
 
   for(var i=0; i<local.vendedoras.length; i++){
       ventasVendedora[i]={nombre: local.vendedoras[i], componentes: [] }
