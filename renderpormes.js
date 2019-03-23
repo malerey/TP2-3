@@ -1,5 +1,3 @@
-//console.log('Hola Mundo')
-
 //Local de ventas de PCs
 //Una empresa de venta de computadoras está desarrollando un sistema para llevar registro de ventas. Para ello cuenta con la siguiente información:
 
@@ -57,6 +55,7 @@ function precioMaquina (arrayComponentes){
     return total + suma; // Este este return es solo de esta función
   })
 } else{
+  
   return 0
 }
   
@@ -108,64 +107,63 @@ console.log('\n')
 
 function vendedoraDelMes(mes,anio){
 
-    var ventasVendedora = [];
+  var ventasVendedora = [];
 
 
 
-    for(i=0; i<local.vendedoras.length; i++){
-        ventasVendedora[i]={nombre: local.vendedoras[i], componentes: [] }
-    }
+  for(var i=0; i<local.vendedoras.length; i++){
+      ventasVendedora[i]={nombre: local.vendedoras[i], componentes: [] }
+  }
 
-    for(i=0; i<local.ventas.length; i++){
+  for(var i=0; i<local.ventas.length; i++){
 
-        if(mes -1 === local.ventas[i].fecha.getMonth() && anio === local.ventas[i].fecha.getFullYear()){
+      if(mes -1 === local.ventas[i].fecha.getMonth() && anio === local.ventas[i].fecha.getFullYear()){
+          
+          for(j=0; j<ventasVendedora.length; j++){
+
+              if(local.ventas[i].nombreVendedora === ventasVendedora[j].nombre){
             
-            for(j=0; j<ventasVendedora.length; j++){
+                  ventasVendedora[j].componentes.push(precioMaquina(local.ventas[i].componentes))
+              }
+          }
 
-                if(local.ventas[i].nombreVendedora === ventasVendedora[j].nombre){
-              
-                    ventasVendedora[j].componentes.push(precioMaquina(local.ventas[i].componentes))
-                }
-            }
-
-            
-        }
-    }
-console.log(ventasVendedora)
-    for(i=0; i<ventasVendedora.length; i++){
-
-      if(ventasVendedora[i].componentes.length){
-
-            ventasVendedora[i].componentes = ventasVendedora[i].componentes.reduce(function(total,suma){
-              return total + suma
-
-        })
-        
+          
       }
-    
+  }
+
+  for(var i=0; i<ventasVendedora.length; i++){
+
+    if(ventasVendedora[i].componentes.length){
+
+          ventasVendedora[i].componentes = ventasVendedora[i].componentes.reduce(function(total,suma){
+            return total + suma
+
+      })
+      
     }
+  
+  }
 
-    var valorMaximo = 0;
-    var vendedora ='';
+  var valorMaximo = 0;
+  var vendedora ='';
 
-    for(i=0; i<ventasVendedora.length; i++){
+  for(var i=0; i<ventasVendedora.length; i++){
 
-      if(valorMaximo< ventasVendedora[i].componentes){
+    if(valorMaximo< ventasVendedora[i].componentes){
 
-        valorMaximo = ventasVendedora[i].componentes;
+      valorMaximo = ventasVendedora[i].componentes;
 
-        vendedora = ventasVendedora[i].nombre;
+      vendedora = ventasVendedora[i].nombre;
 
-      }
     }
-  return vendedora
+  }
+return vendedora
 
 }
 
 console.log(vendedoraDelMes(1, 2019)); // "Ada" (vendio por $670, una máquina de $320 y otra de $350)
 console.log(vendedoraDelMes(2, 2019)); 
 console.log('\n')
-/*
 //---------------------------------------------------------------------------------------------------------------------------
 
 //ventasMes(mes, anio): Obtener las ventas de un mes.
@@ -173,22 +171,20 @@ console.log('\n')
 function ventasMes(mes,anio){
 
   var componentesVendidos =[];
-  var componentesASumar =[];
+
 
   local.ventas.map(function(cadaVenta){
 
     if(mes -1 === cadaVenta.fecha.getMonth() && anio === cadaVenta.fecha.getFullYear()){
-      componentesVendidos.push(cadaVenta.componentes)
+
+      cadaVenta.componentes.map(function(cadaComponente){
+
+        componentesVendidos.push(cadaComponente)
+      })
   }
   })
-  
-  componentesVendidos.map(function(cadaVenta){
-    cadaVenta.map(function(cadaComponente){
-      componentesASumar.push(cadaComponente)
-    })
-  })
-  
-  return precioMaquina(componentesASumar)
+
+  return precioMaquina(componentesVendidos)
 }
 
 console.log( ventasMes(1, 2019) ); // 1250
@@ -238,101 +234,43 @@ console.log('\n')
 
 function componenteMasVendido(){
 
-  var monitorGprs3000 = 0;
-  var motherboardAsus1500 = 0;
-  var monitorAsc543 = 0;
-  var motherboardAsus1200 = 0;
-  var motherboardMzi = 0;
-  var hddToyiva = 0;
-  var hddWezterDishital = 0;
-  var ramQuinston = 0;
-  var ramQuinstonFury = 0;
+  var compo = [];
 
-  local.ventas.map(function(cadaVenta){
+  for(var i =0; i<local.precios.length; i++){
 
-    cadaVenta.componentes.map(function(cadaComponente){
+      compo[i] = {componente: local.precios[i].componente, contador:0}
 
-      if(cadaComponente === 'Monitor GPRS 3000'){
+  }
 
-        monitorGprs3000 = cantidadVentasComponente('Monitor GPRS 3000')
+  for(var i = 0; i< local.ventas.length; i++){
 
-      }else if(cadaComponente === 'Motherboard ASUS 1500'){
+      for(var j=0; j<compo.length; j++){
 
-        motherboardAsus1500 = cantidadVentasComponente('Motherboard ASUS 1500')
+          if(local.ventas[i].componentes[j] === compo[j].componente){
 
-      }else if(cadaComponente === 'Monitor ASC 543'){
-
-        monitorAsc543 = cantidadVentasComponente('Monitor ASC 543')
-
-      }else if(cadaComponente === 'Motherboard ASUS 1200'){
-
-        motherboardAsus1200 = cantidadVentasComponente('Motherboard ASUS 1200')
-
-      }else if(cadaComponente === 'Motherboard MZI'){
-
-        motherboardMzi = cantidadVentasComponente('Motherboard MZI')
-
-      }else if(cadaComponente === 'HDD Toyiva'){
-
-        hddToyiva = cantidadVentasComponente('HDD Toyiva')
-
-      }else if(cadaComponente === 'HDD Wezter Dishital'){
-
-        hddWezterDishital = cantidadVentasComponente('HDD Wezter Dishital')
-
-      }else if(cadaComponente === 'RAM Quinston'){
-
-        ramQuinston = cantidadVentasComponente('RAM Quinston')
-
-      }else if(cadaComponente === 'RAM Quinston Fury'){
-
-        ramQuinstonFury = cantidadVentasComponente('RAM Quinston Fury')
-
+              compo[j].contador ++
+          }
       }
-    })
+  }
 
-  })
+  var valorMaximo = 0;
+  var componenteMasVendido = '';
 
-  if(monitorGprs3000 > motherboardAsus1500 && monitorGprs3000 > monitorAsc543 && monitorGprs3000 > motherboardAsus1200 && monitorGprs3000 > motherboardMzi && monitorGprs3000 > hddToyiva && monitorGprs3000 > hddWezterDishital && monitorGprs3000 > ramQuinston && monitorGprs3000 > ramQuinstonFury){
-    
-    return 'Monitor GPRS 3000'
+  for(var i=0; i< compo.length; i++){
 
-  }else if(motherboardAsus1500 > monitorGprs3000 && motherboardAsus1500 > monitorAsc543 && motherboardAsus1500 > motherboardAsus1200 && motherboardAsus1500 > motherboardMzi && motherboardAsus1500 > hddToyiva && motherboardAsus1500 > hddWezterDishital && motherboardAsus1500 > ramQuinston && motherboardAsus1500 > ramQuinstonFury){
-    
-    return 'Motherboard ASUS 1500'
 
-  }else if(monitorAsc543 > monitorGprs3000 && monitorAsc543 > motherboardAsus1500 && monitorAsc543 > motherboardAsus1200 && monitorAsc543 > motherboardMzi && monitorAsc543 > hddToyiva && monitorAsc543 > hddWezterDishital && monitorAsc543 > ramQuinston && monitorAsc543 > ramQuinstonFury){
-    
-    return 'monitorAsc 543'
 
-  }else if(motherboardAsus1200 > monitorGprs3000 && motherboardAsus1200 > motherboardAsus1500 && motherboardAsus1200 > monitorAsc543 && motherboardAsus1200 > motherboardMzi && motherboardAsus1200 > hddToyiva && motherboardAsus1200 > hddWezterDishital && motherboardAsus1200 > ramQuinston && motherboardAsus1200 > ramQuinstonFury){
-    
-    return 'Motherboard ASUS 1200'
+      if(valorMaximo < compo[i].contador){
+          
+          valorMaximo = compo[i].contador;
+          componenteMasVendido = compo[i].componente
+      }
+  }
 
-  }else if(motherboardMzi > monitorGprs3000 && motherboardMzi > motherboardAsus1500 && motherboardMzi > monitorAsc543 && motherboardAsus1200 < motherboardMzi && motherboardMzi > hddToyiva && motherboardMzi > hddWezterDishital && motherboardMzi > ramQuinston && motherboardMzi > ramQuinstonFury){
-    
-    return 'Motherboard MZI'
-
-  }else if(hddToyiva > monitorGprs3000 && hddToyiva > motherboardAsus1500 && hddToyiva > monitorAsc543 && hddToyiva > motherboardAsus1200 && hddToyiva > motherboardMzi && hddToyiva > hddWezterDishital && hddToyiva > ramQuinston && hddToyiva > ramQuinstonFury){
-    
-    return 'HDD Toyiva'
-
-  }else if(hddWezterDishital > monitorGprs3000 && hddWezterDishital > motherboardAsus1500 && hddWezterDishital > monitorAsc543 && hddWezterDishital > motherboardAsus1200 && hddWezterDishital > motherboardMzi && hddToyiva < hddWezterDishital && hddWezterDishital > ramQuinston && hddWezterDishital > ramQuinstonFury){
-    
-    return 'HDD Wezter Dishital'
-
-  }else if(ramQuinston > monitorGprs3000 && ramQuinston > motherboardAsus1500 && ramQuinston > monitorAsc543 && ramQuinston > motherboardAsus1200 && ramQuinston > motherboardMzi && ramQuinston > hddToyiva && ramQuinston > hddWezterDishital && ramQuinston > ramQuinstonFury){
-    
-    return 'RAM Quinston'
-
-  }else if(ramQuinstonFury > monitorGprs3000 && ramQuinstonFury > motherboardAsus1500 && ramQuinstonFury > monitorAsc543 && ramQuinstonFury > motherboardAsus1200 && ramQuinstonFury > motherboardMzi && ramQuinstonFury > hddToyiva && ramQuinstonFury > hddWezterDishital && ramQuinstonFury > ramQuinston){
-    
-    return 'RAM Quinston Fury'
-
-  } 
+  return componenteMasVendido
 }
 
-console.log( componenteMasVendido() ); // Monitor GPRS 3000
+console.log( componenteMasVendido()); // Monitor GPRS 3000
 console.log('\n')
 
 //---------------------------------------------------------------------------------------------------------------------------
@@ -453,42 +391,58 @@ console.log('\n')
 
 //---------------------------------------------------------------------------------------------------------------------------
 
-//Crear la función sucursalDelMes(mes, anio), que se le pasa dos parámetros numéricos, (mes, anio) y devuelve el nombre de la sucursal que más vendió en plata en el mes. No cantidad de ventas, sino importe total de las ventas. El importe de una venta es el que indica la función precioMaquina.
+//Crear la función sucursalDelMes(mes, anio), que se le pasa dos parámetros numéricos, (mes, anio) y devuelve el nombre de la sucursal que más vendió en plata en el mes. 
+//No cantidad de ventas, sino importe total de las ventas. El importe de una venta es el que indica la función precioMaquina.
 
 function sucursalDelMes(mes, anio){
 
-  var centro = [];
-  var componentesASumarCentro = [];
-  var caballito = [];
-  var componentesASumarCaballito = [];
-  
-  local.ventas.map(function(cadaVenta){
+  var sucursales = [];
 
-    if(mes -1 === cadaVenta.fecha.getMonth() && anio === cadaVenta.fecha.getFullYear()){
+  for(var i=0; i<local.sucursales.length; i++){
 
-      if(cadaVenta.sucursal === 'Centro'){
+    sucursales[i]={nombre: local.sucursales[i], componentes: [] }
+}
 
-        centro.push(cadaVenta.componentes)
+  for(var i=0; i<local.ventas.length; i++){
 
-      }else if(cadaVenta.sucursal === 'Caballito'){
+    if(mes -1 === local.ventas[i].fecha.getMonth() && anio === local.ventas[i].fecha.getFullYear()){
+      
+      for(var j=0; j<sucursales.length; j++){
 
-        caballito.push(cadaVenta.componentes)
+        if(local.ventas[i].sucursal === sucursales[j].nombre){
+
+          for(var k =0; k<local.ventas[i].componentes.length; k++){
+
+            sucursales[j].componentes.push(local.ventas[i].componentes[k])
+          }
+        }
       }
     }
-  })
-  centro = reducir(centro, componentesASumarCentro);
-  caballito = reducir(caballito, componentesASumarCaballito);
-  
-
-if(centro > caballito){
-
-    return 'Centro';
-
-}else if(caballito> centro){
-
-    return 'Caballito'
+   
   }
+sucursales.map(function(cadaSucursal){
+
+  cadaSucursal.componentes = precioMaquina(cadaSucursal.componentes);
+})
+
+var valorMaximo = 0;
+
+  var sucursalMasVentas = '';
+
+  for(var i=0; i < sucursales.length; i++){
+
+      if(valorMaximo < sucursales[i].componentes){
+          
+          valorMaximo = sucursales[i].componentes;
+
+          sucursalMasVentas = sucursales[i].nombre;
+      }
+  }
+
+  return sucursalMasVentas
 }
+
+
 console.log( sucursalDelMes(1, 2019) ); // "Centro"
 console.log( sucursalDelMes(2, 2019) ); 
 console.log('\n')
@@ -499,290 +453,37 @@ console.log('\n')
 
 //renderPorMes(): Muestra una lista ordenada del importe total vendido por cada mes/año
 
+console.log('lalala')
 function renderPorMes(){
 
-  var enero =[];
-  var eneroVentas = [];
-  var febrero =[];
-  var febreroVentas = [];
-  var marzo = [];
-  var marzoVentas = [];
-  var abril =[];
-  var abrilVentas = [];
-  var mayo =[];
-  var mayoVentas = [];
-  var junio =[];
-  var junioVentas = [];
-  var julio =[];
-  var julioVentas = [];
-  var julio =[];
-  var julioVentas = [];
-  var agosto = [];
-  var agostoVentas = [];
-  var septiembre = [];
-  var septiembreVentas = [];
-  var octubre = [];
-  var octubreVentas = [];
-  var noviembre = [];
-  var noviembreVentas = [];
-  var diciembre = [];
-  var diciembreVentas = [];
+  var ventasRender = {anio:[local.ventas[0].fecha.getUTCFullYear()], 
+                      meses: [{mes:1, nombre: 'enero'}, {mes:2, nombre: 'febrero'}, {mes:3, nombre: 'marzo'}, {mes:4, nombre: 'abril'}, {mes:5, nombre: 'mayo'}, {mes: 6, nombre: 'junio'},
+                      {mes:7, nombre: 'julio'}, {mes:8, nombre: 'agosto'}, {mes:9, nombre: 'septiembre'}, {mes:10, nombre: 'octubre'},{mes:11, nombre: 'noviembre'},{mes:12, nombre: 'diciembre'}]
+                    }  
 
 
-  local.ventas.map(function(cadaVenta){
+local.ventas.map(function(cadaVenta){
 
-    if(cadaVenta.fecha.getMonth() === 0){
+  if(cadaVenta.fecha.getFullYear() !== ventasRender.anio[0]){
 
-      enero.push(cadaVenta.componentes)
+    ventasRender.anio.push(cadaVenta.fecha.getFullYear())
+  }
+  
+})
 
-    }else if(cadaVenta.fecha.getMonth() === 1){
+for(var i = 0; i<ventasRender.anio.length; i++){
 
-      febrero.push(cadaVenta.componentes)
-
-    }else if(cadaVenta.fecha.getMonth() === 2){
-
-      marzo.push(cadaVenta.componentes)
-      
-    }else if(cadaVenta.fecha.getMonth() === 3){
-
-      abril.push(cadaVenta.componentes)
-
-    }else if(cadaVenta.fecha.getMonth() === 4){
-
-      mayo.push(cadaVenta.componentes)
-
-    }else if(cadaVenta.fecha.getMonth() === 5){
-
-      junio.push(cadaVenta.componentes)
-
-    }else if(cadaVenta.fecha.getMonth() === 6){
-
-      julio.push(cadaVenta.componentes)
-
-    }else if(cadaVenta.fecha.getMonth() === 7){
-
-      agosto.push(cadaVenta.componentes)
-
-    }else if(cadaVenta.fecha.getMonth() === 8){
-
-      septiembre.push(cadaVenta.componentes)
-
-    }else if(cadaVenta.fecha.getMonth() === 9){
-
-      octubre.push(cadaVenta.componentes)
-
-    }else if(cadaVenta.fecha.getMonth() === 10){
-
-      noviembre.push(cadaVenta.componentes)
-
-    }else if(cadaVenta.fecha.getMonth() === 11){
-
-      diciembre.push(cadaVenta.componentes)
+  for(var j=0; j<ventasRender.meses.length; j++){
+   
+  return 'ventas por mes:\n' + ventasRender.meses[j].nombre + ' ' + ventasRender.anio[i] + ': ' + ventasMes(ventasRender.meses[j].mes, ventasRender.anio[i])
 
   }
-
-})
-
-enero.map(function(cadaVenta){
-
-  cadaVenta.map(function(cadaComponente){
-
-    if(enero.length){
-
-      eneroVentas.push(cadaComponente)
-
-    } else {
-
-      return 0
-    }
-
-  })
-
-})
-
-febrero.map(function(cadaVenta){
-
-  cadaVenta.map(function(cadaComponente){
-
-    if(febrero.length){
-
-      febreroVentas.push(cadaComponente)
-
-    } else {
-      
-      return 0
-    }
-
-  })
-
-})
-marzo.map(function(cadaVenta){
-
-  cadaVenta.map(function(cadaComponente){
-
-    if(marzo.length){
-
-      marzoVentas.push(cadaComponente)
-
-    } else {
-      
-      return 0
-    }
-
-  })
-
-})
-abril.map(function(cadaVenta){
-
-  cadaVenta.map(function(cadaComponente){
-
-    if(abril.length){
-
-      abrilVentas.push(cadaComponente)
-
-    } else {
-      
-      return 0
-    }
-
-  })
-
-})
-mayo.map(function(cadaVenta){
-
-  cadaVenta.map(function(cadaComponente){
-
-    if(mayo.length){
-
-      mayoVentas.push(cadaComponente)
-
-    } else {
-      
-      return 0
-    }
-
-  })
-
-})
-junio.map(function(cadaVenta){
-
-  cadaVenta.map(function(cadaComponente){
-
-    if(junio.length){
-
-      junioVentas.push(cadaComponente)
-
-    } else {
-      
-      return 0
-    }
-
-  })
-
-})
-julio.map(function(cadaVenta){
-
-  cadaVenta.map(function(cadaComponente){
-
-    if(julio.length){
-
-      julioVentas.push(cadaComponente)
-
-    } else {
-      
-      return 0
-    }
-
-  })
-
-})
-agosto.map(function(cadaVenta){
-
-  cadaVenta.map(function(cadaComponente){
-
-    if(agosto.length){
-
-      agostoVentas.push(cadaComponente)
-
-    } else {
-      
-      return 0
-    }
-
-  })
-
-})
-septiembre.map(function(cadaVenta){
-
-  cadaVenta.map(function(cadaComponente){
-
-    if(septiembre.length){
-
-      septiembreVentas.push(cadaComponente)
-
-    } else {
-      
-      return 0
-    }
-
-  })
-
-})
-octubre.map(function(cadaVenta){
-
-  cadaVenta.map(function(cadaComponente){
-
-    if(octubre.length){
-
-      octubreVentas.push(cadaComponente)
-
-    } else {
-      
-      return 0
-    }
-
-  })
-
-})
-noviembre.map(function(cadaVenta){
-
-  cadaVenta.map(function(cadaComponente){
-
-    if(noviembre.length){
-
-      noviembreVentas.push(cadaComponente)
-
-    } else {
-      
-      return 0
-
-    }
-
-  })
-
-})
-diciembre.map(function(cadaVenta){
-
-  cadaVenta.map(function(cadaComponente){
-
-    if(diciembre.length){
-
-      diciembreVentas.push(cadaComponente)
-
-    } else {
-      
-      return 0
-    }
-
-  })
-
-})
-
-return 'Total por mes:' + '\n Total de enero 2019: ' + precioMaquina(eneroVentas) + '\n Total de febrero 2019: ' + precioMaquina(febreroVentas) 
+}
 }
 
 console.log( renderPorMes() );
 console.log('\n')
+console.log('fuck javaScript')
 
 // Ventas por mes:
 //   Total de enero 2019: 1250,
@@ -934,4 +635,3 @@ console.log( render() );
 //   Total de Caballito: 1265
 // Producto estrella: Monitor GPRS 3000
 // Vendedora que más ingresos generó: Grace
-*/
