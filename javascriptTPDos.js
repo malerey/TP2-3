@@ -475,7 +475,6 @@ for(var i = 0; i<ventasRender.anio.length; i++){
 }
 }
 
-
 console.log( renderPorMes() );
 console.log('\n')
 
@@ -512,18 +511,18 @@ function renderPorSucursal(){
       }
     }
   }
-  function meses (){
+  var porSucursal =['ventas por sucursal:\n'];
 
-  for(var i=0; i< sucursales.length; i++){
-
-    return  'Total de ' + sucursales[i].sucursal + ': ' +  precioMaquina(sucursales[i].componentes)
-    //me pasa lo mismo: no puedo retornar sin cortar el for
-  }
-}
-  return 'Ventas por sucursal: \n' + meses()
-}
+  for(var i=0; i<sucursales.length; i++){
   
+    porSucursal.push('Total de ' + sucursales[i].sucursal + ': ' +  precioMaquina(sucursales[i].componentes)+ '\n')
+
+  }
+return porSucursal
+}
+//Como no podía retornar dentro de un for, acá retorné desde un array, pero tampoco queda bien.
 console.log( renderPorSucursal() );
+
 // Ventas por sucursal:
 //   Total de Centro: 4195
 //   Total de Caballito: 1265
@@ -581,10 +580,10 @@ function vendedora(){
 return vendedora
 
 } 
-function render(){
 
+function render(){
   
-return 'Reporte ' + '\nVentas por mes: \n' + renderPorMes() + '\n\n ventas por sucursal: ' + renderPorSucursal() + '\n\n Producto estrella ' + componenteMasVendido () + '\n\n Vendedora que más ingresos generó: ' + vendedora()
+return 'Reporte ' + '\nVentas por mes: \n' + renderPorMes() + '\n\n ventas por sucursal: ' + renderPorSucursal() + '\n Producto estrella ' + componenteMasVendido () + '\n\n Vendedora que más ingresos generó: ' + vendedora()
 }
 
 
