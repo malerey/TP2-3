@@ -455,285 +455,31 @@ console.log('\n')
 
 function renderPorMes(){
 
-  var enero =[];
-  var eneroVentas = [];
-  var febrero =[];
-  var febreroVentas = [];
-  var marzo = [];
-  var marzoVentas = [];
-  var abril =[];
-  var abrilVentas = [];
-  var mayo =[];
-  var mayoVentas = [];
-  var junio =[];
-  var junioVentas = [];
-  var julio =[];
-  var julioVentas = [];
-  var julio =[];
-  var julioVentas = [];
-  var agosto = [];
-  var agostoVentas = [];
-  var septiembre = [];
-  var septiembreVentas = [];
-  var octubre = [];
-  var octubreVentas = [];
-  var noviembre = [];
-  var noviembreVentas = [];
-  var diciembre = [];
-  var diciembreVentas = [];
+  var ventasRender = {anio:[local.ventas[0].fecha.getUTCFullYear()], 
+                      meses: [{mes:1, nombre: 'enero'}, {mes:2, nombre: 'febrero'}, {mes:3, nombre: 'marzo'}, {mes:4, nombre: 'abril'}, {mes:5, nombre: 'mayo'}, {mes: 6, nombre: 'junio'},
+                      {mes:7, nombre: 'julio'}, {mes:8, nombre: 'agosto'}, {mes:9, nombre: 'septiembre'}, {mes:10, nombre: 'octubre'},{mes:11, nombre: 'noviembre'},{mes:12, nombre: 'diciembre'}]
+                    }  
 
 
-  local.ventas.map(function(cadaVenta){
+local.ventas.map(function(cadaVenta){
 
-    if(cadaVenta.fecha.getMonth() === 0){
+  if(cadaVenta.fecha.getFullYear() !== ventasRender.anio[0]){
 
-      enero.push(cadaVenta.componentes)
-
-    }else if(cadaVenta.fecha.getMonth() === 1){
-
-      febrero.push(cadaVenta.componentes)
-
-    }else if(cadaVenta.fecha.getMonth() === 2){
-
-      marzo.push(cadaVenta.componentes)
-      
-    }else if(cadaVenta.fecha.getMonth() === 3){
-
-      abril.push(cadaVenta.componentes)
-
-    }else if(cadaVenta.fecha.getMonth() === 4){
-
-      mayo.push(cadaVenta.componentes)
-
-    }else if(cadaVenta.fecha.getMonth() === 5){
-
-      junio.push(cadaVenta.componentes)
-
-    }else if(cadaVenta.fecha.getMonth() === 6){
-
-      julio.push(cadaVenta.componentes)
-
-    }else if(cadaVenta.fecha.getMonth() === 7){
-
-      agosto.push(cadaVenta.componentes)
-
-    }else if(cadaVenta.fecha.getMonth() === 8){
-
-      septiembre.push(cadaVenta.componentes)
-
-    }else if(cadaVenta.fecha.getMonth() === 9){
-
-      octubre.push(cadaVenta.componentes)
-
-    }else if(cadaVenta.fecha.getMonth() === 10){
-
-      noviembre.push(cadaVenta.componentes)
-
-    }else if(cadaVenta.fecha.getMonth() === 11){
-
-      diciembre.push(cadaVenta.componentes)
-
+    ventasRender.anio.push(cadaVenta.fecha.getFullYear())
   }
-
+  
 })
 
-enero.map(function(cadaVenta){
-
-  cadaVenta.map(function(cadaComponente){
-
-    if(enero.length){
-
-      eneroVentas.push(cadaComponente)
-
-    } else {
-
-      return 0
-    }
-
-  })
-
-})
-
-febrero.map(function(cadaVenta){
-
-  cadaVenta.map(function(cadaComponente){
-
-    if(febrero.length){
-
-      febreroVentas.push(cadaComponente)
-
-    } else {
-      
-      return 0
-    }
-
-  })
-
-})
-marzo.map(function(cadaVenta){
-
-  cadaVenta.map(function(cadaComponente){
-
-    if(marzo.length){
-
-      marzoVentas.push(cadaComponente)
-
-    } else {
-      
-      return 0
-    }
-
-  })
-
-})
-abril.map(function(cadaVenta){
-
-  cadaVenta.map(function(cadaComponente){
-
-    if(abril.length){
-
-      abrilVentas.push(cadaComponente)
-
-    } else {
-      
-      return 0
-    }
-
-  })
-
-})
-mayo.map(function(cadaVenta){
-
-  cadaVenta.map(function(cadaComponente){
-
-    if(mayo.length){
-
-      mayoVentas.push(cadaComponente)
-
-    } else {
-      
-      return 0
-    }
-
-  })
-
-})
-junio.map(function(cadaVenta){
-
-  cadaVenta.map(function(cadaComponente){
-
-    if(junio.length){
-
-      junioVentas.push(cadaComponente)
-
-    } else {
-      
-      return 0
-    }
-
-  })
-
-})
-julio.map(function(cadaVenta){
-
-  cadaVenta.map(function(cadaComponente){
-
-    if(julio.length){
-
-      julioVentas.push(cadaComponente)
-
-    } else {
-      
-      return 0
-    }
-
-  })
-
-})
-agosto.map(function(cadaVenta){
-
-  cadaVenta.map(function(cadaComponente){
-
-    if(agosto.length){
-
-      agostoVentas.push(cadaComponente)
-
-    } else {
-      
-      return 0
-    }
-
-  })
-
-})
-septiembre.map(function(cadaVenta){
-
-  cadaVenta.map(function(cadaComponente){
-
-    if(septiembre.length){
-
-      septiembreVentas.push(cadaComponente)
-
-    } else {
-      
-      return 0
-    }
-
-  })
-
-})
-octubre.map(function(cadaVenta){
-
-  cadaVenta.map(function(cadaComponente){
-
-    if(octubre.length){
-
-      octubreVentas.push(cadaComponente)
-
-    } else {
-      
-      return 0
-    }
-
-  })
-
-})
-noviembre.map(function(cadaVenta){
-
-  cadaVenta.map(function(cadaComponente){
-
-    if(noviembre.length){
-
-      noviembreVentas.push(cadaComponente)
-
-    } else {
-      
-      return 0
-      
-    }
-
-  })
-
-})
-diciembre.map(function(cadaVenta){
-
-  cadaVenta.map(function(cadaComponente){
-
-    if(diciembre.length){
-
-      diciembreVentas.push(cadaComponente)
-
-    } else {
-      
-      return 0
-    }
-
-  })
-
-})
-
-return 'Total por mes:' + '\n Total de enero 2019: ' + precioMaquina(eneroVentas) + '\n Total de febrero 2019: ' + precioMaquina(febreroVentas) 
+for(var i = 0; i<ventasRender.anio.length; i++){
+
+  for(var j=0; j<ventasRender.meses.length; j++){
+   
+  return 'ventas por mes:\n' + ventasRender.meses[j].nombre + ' ' + ventasRender.anio[i] + ': ' + ventasMes(ventasRender.meses[j].mes, ventasRender.anio[i])
+    //acá no logro retornar sin cortar el for
+  }
 }
+}
+
 
 console.log( renderPorMes() );
 console.log('\n')
