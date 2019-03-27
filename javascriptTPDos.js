@@ -583,7 +583,7 @@ return vendedora
 
 function render(){
   
-return 'Reporte ' + '\nVentas por mes: \n' + renderPorMes() + '\n\n ventas por sucursal: ' + renderPorSucursal() + '\n Producto estrella ' + componenteMasVendido () + '\n\n Vendedora que más ingresos generó: ' + vendedora()
+return 'Reporte ' + '\nVentas por mes: \n' + renderPorMes() + '\n\n ventas por sucursal: ' + renderPorSucursal() + '\n Producto estrella: ' + componenteMasVendido () + '\n\n Vendedora que más ingresos generó: ' + vendedora()
 }
 
 
