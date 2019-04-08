@@ -1,3 +1,10 @@
+// Querida Marian, te dejo mis observaciones a tu TP
+// Lamento no tener mucho para decir, pero es lo que suele ocurrir frente a un trabajo excelente. 
+// Mas que felicitarte y quiza mostrarte otras maneras de hacer las cosas para que sigas explorando, no puedo decir. 
+// Por eso mis observaciones, que deje a lo largo de tu trabajo, son bastante breves. 
+// Lo unico que puedo agregar es "seguí así!"
+
+
 //Local de ventas de PCs
 //Una empresa de venta de computadoras está desarrollando un sistema para llevar registro de ventas. Para ello cuenta con la siguiente información:
 
@@ -60,6 +67,21 @@ function precioMaquina (arrayComponentes){
 }
   
 }
+
+// AMO esta solucion con map y reduce
+// aca te dejo una alternativa para que explores:
+
+
+// function precioMaquina(componentes) {
+//   return componentes.map(function (cadaComponente) {
+//     return local.precios.find(function (precio) {
+//       return precio.componente === cadaComponente;
+//     }).precio;
+//   }).reduce(function (total, suma) {
+//     return total + suma;
+//   });
+// }
+
 console.log(precioMaquina(["Monitor GPRS 3000", "Motherboard ASUS 1500"]))
 console.log(precioMaquina(["Monitor GPRS 3000", "Motherboard ASUS 1500"]))
 console.log(precioMaquina(["Monitor ASC 543", "Motherboard MZI"]))
@@ -158,6 +180,24 @@ return vendedora
 
 }
 
+// ya que empezaste con map y reduce, te dejo esta funcion con esos metodos tambien
+
+// function vendedoraDelMes(mes, anio) {
+//   var totalVentas = ventas.filter(function (v) {
+//     return v.fecha.getMonth() + 1 == mes && v.fecha.getFullYear() == anio;
+//   }).reduce(function (t, v) {
+//     if (!t[v.nombreVendedora]) {
+//       t[v.nombreVendedora] = 0;
+//     }
+//     t[v.nombreVendedora] += precioMaquina(v.componentes);
+//     return t;
+//   }, []);
+
+//   return vendedoras.reduce(function (max, v) {
+//     if (!max || totalVentas[v] > totalVentas[max]) return v;
+//    else return max;
+//   }, null);
+// }
 console.log(vendedoraDelMes(1, 2019)); // "Ada" (vendio por $670, una máquina de $320 y otra de $350)
 console.log(vendedoraDelMes(2, 2019)); 
 console.log('\n')
@@ -225,6 +265,8 @@ console.log( ventasVendedora("Grace") ); // 900
 console.log( ventasVendedora("Ada") ); // 670
 console.log('\n')
 
+// fantastico!
+
 //---------------------------------------------------------------------------------------------------------------------------
 
 //componenteMasVendido(): Devuelve el nombre del componente que más ventas tuvo historicamente. El dato de la cantidad de ventas es el que indica la función cantidadVentasComponente
@@ -268,6 +310,19 @@ function componenteMasVendido(){
 console.log( componenteMasVendido()); // Monitor GPRS 3000
 console.log('\n')
 
+
+// una manera alternativa:
+// function componenteMasVendido () {
+//   var componente = precios[0].componente;
+
+//   for (var i = 0; i < precios.length; i++) {
+//     if (cantidadVentasComponente(precios[i].componente) > cantidadVentasComponente(componente)) {
+//       componente = precios[i].componente;
+//     }
+//   }
+
+//   return componente;
+// }
 //---------------------------------------------------------------------------------------------------------------------------
 
 //huboVentas(mes, anio): que indica si hubo ventas en un mes determinado.
@@ -287,6 +342,8 @@ var ventas = false;
   })
   return ventas
 }
+
+// bien!
 
 console.log( huboVentas(3, 2019) ); // false
 console.log( huboVentas(1, 2019) ); // true
@@ -471,6 +528,11 @@ for(var i = 0; i<ventasRender.anio.length; i++){
    
   return 'ventas por mes:\n' + ventasRender.meses[j].nombre + ' ' + ventasRender.anio[i] + ': ' + ventasMes(ventasRender.meses[j].mes, ventasRender.anio[i])
     //acá no logro retornar sin cortar el for
+    
+    // no se puede hacer un return dentro de un for sin cortarlo. apenas hay un return, 
+    // la funcion se deja de ejecutar
+    // en este caso es permisible que la funcion no retorne nada
+    // y hacer un console.log dentro del for 
   }
 }
 }
